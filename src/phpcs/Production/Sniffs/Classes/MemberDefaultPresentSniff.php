@@ -39,20 +39,20 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
     {
         $tokens = $phpcsFile->getTokens();
 
-        $memberCandidate = $tokens[$stackPointer + 2];
+        $memberCandidate    = $tokens[$stackPointer + 2];
         $semicolonCandidate = $tokens[$stackPointer + 3];
-        $equalsCandidate = $tokens[$stackPointer + 4];
-        $valueCandidate = $tokens[$stackPointer + 6];
+        $equalsCandidate    = $tokens[$stackPointer + 4];
+        $valueCandidate     = $tokens[$stackPointer + 6];
 
-        $isMemberVariable = $memberCandidate['type'] === 'T_VARIABLE';
+        $isMemberVariable            = $memberCandidate['type'] === 'T_VARIABLE';
         $memberVariableWithSemicolon = $semicolonCandidate['type'] === 'T_SEMICOLON';
-        $memberVariableWithEquals = $equalsCandidate['type'] === 'T_EQUALS';
-        $isValidValueType = in_array($valueCandidate['type'], $this->validValueTypes, true);
+        $memberVariableWithEquals    = $equalsCandidate['type'] === 'T_EQUALS';
+        $isValidValueType            = in_array($valueCandidate['type'], $this->validValueTypes, true);
 
         if ($isMemberVariable && $memberVariableWithSemicolon && !$memberVariableWithEquals && !$isValidValueType)
         {
-            $type = 'Member variable without default value';
-            $data = $memberCandidate['content'];
+            $type  = 'Member variable without default value';
+            $data  = $memberCandidate['content'];
             $error = 'Member variable ' . $memberCandidate['content'] . ' without default value';
             $phpcsFile->addWarning($error, $stackPointer, $type, $data);
         }
