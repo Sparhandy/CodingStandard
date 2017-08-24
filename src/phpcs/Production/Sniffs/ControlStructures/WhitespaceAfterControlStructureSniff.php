@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüfen, ob eine Leerstelle nach einer Kontrollstuktur existiert.
+ * Checks if there is a whitespace after the control structure.
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
@@ -18,9 +18,7 @@ class Production_Sniffs_ControlStructures_WhitespaceAfterControlStructureSniff i
     const WANTED_TOKEN = 'T_WHITESPACE';
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -39,10 +37,7 @@ class Production_Sniffs_ControlStructures_WhitespaceAfterControlStructureSniff i
     }
 
     /**
-     * Processes this sniff when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPointer The position of the current token in the stack passed in $tokens
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -53,9 +48,9 @@ class Production_Sniffs_ControlStructures_WhitespaceAfterControlStructureSniff i
         {
             return;
         }
-        $type  = 'Kein Whitespace nach Kontrollstruktor';
+        $type  = 'No whitespace after control structure allowed.';
         $data  = [$tokens[$stackPointer]['content']];
-        $error = 'Nach ' . $tokens[$stackPointer]['content'] . ' muss ein Leerzeichen stehen.';
+        $error = 'There must be a whitespace after ' . $tokens[$stackPointer]['content'] . '.';
         $phpcsFile->addWarning($error, $stackPointer, $type, $data);
     }
 }

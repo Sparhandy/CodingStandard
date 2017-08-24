@@ -1,7 +1,6 @@
 <?php
 /**
- * Prüft, dass bei Blöcken nach den öffnenden geschweiften Klammern bzw. nach den schließenden geschweiften Klammern keine
- * Leerzeilen stehen.
+ * Checks if there are no linefeeds after or before opening or closing curly braces.
  *
  * @author Andreas Borisov <andreas.borisov@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
@@ -17,9 +16,7 @@ class Production_Sniffs_Classes_EmptyLinesParenthesisSniff implements PHP_CodeSn
     public $supportedTokenizers = ['PHP'];
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -30,12 +27,7 @@ class Production_Sniffs_Classes_EmptyLinesParenthesisSniff implements PHP_CodeSn
     }
 
     /**
-     * Processes this sniff, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPointer The position of the current token in the stack passed in $tokens
-     *
-     * @return void
+     * {@inheritdoc}
      *
      * @throws UnexpectedValueException
      */
@@ -71,7 +63,7 @@ class Production_Sniffs_Classes_EmptyLinesParenthesisSniff implements PHP_CodeSn
     }
 
     /**
-     * Prüft, ob an Position $stackPointer 2 aufeinanderfolgende Linefeeds stehen.
+     * Checks for two consecutive linefeeds at the $stackPointer's position
      *
      * @param string[] $tokens
      * @param int      $stackPointer

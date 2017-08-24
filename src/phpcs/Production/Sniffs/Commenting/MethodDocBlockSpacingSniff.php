@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft, dass keine Leerzeilen zwischen dem Methoden-DocBlock und der Deklaration stehen.
+ * Checks for the non-existence of an empty line between a method and its docblock.
  *
  * @author Oliver Klee <github@oliverklee.de>
  * @author Dimitri Kontsevoi <dimitri.kontsevoi@sh.de>
@@ -8,10 +8,7 @@
 class Production_Sniffs_Commenting_MethodDocBlockSpacingSniff extends Production_Sniffs_Abstract_MethodSniff
 {
     /**
-     * Snifft anhand des gefundenen Tokens.
-     *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -25,19 +22,19 @@ class Production_Sniffs_Commenting_MethodDocBlockSpacingSniff extends Production
         $numberOfLineFeeds = $this->numberOfLineFeedsBetweenDocBlockAndDeclaration($sniffedFile, $index);
         if ($numberOfLineFeeds > 1)
         {
-            $this->addWarning($sniffedFile, $index, 'Bitte keine Leerzeilen zwischen DocBlock und Deklaration.');
+            $this->addWarning($sniffedFile, $index, 'No empty lines between a method and its docblock.');
         }
         elseif ($numberOfLineFeeds === 0)
         {
-            $this->addWarning($sniffedFile, $index, 'Bitte die Deklaration in eine separate Zeile schreiben.');
+            $this->addWarning($sniffedFile, $index, 'The method and its docblock can\'t be in the same line.');
         }
     }
 
     /**
-     * Zählt die Linefeeds zwischen Methoden-DocBlock und Deklaration.
+     * Counts the linefeeds between a method and its docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $indexOfFunctionToken Position des aktuellen Tokens in der Tokens-Liste
+     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param int                  $indexOfFunctionToken
      *
      * @return int
      */

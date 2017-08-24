@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft auf das Vorhandensein von DocBlocks in Methoden sowie auf die @return-Annotation.
+ * Checks for the existence of a methods docblock as well as the @return annotation inside the docblock.
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
@@ -8,16 +8,11 @@
  */
 class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sniffs_Abstract_MethodSniff
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $methodNamesWithoutNecessaryDocBlock = ['setUp', 'tearDown', 'setUpTest', 'tearDownTest'];
 
     /**
-     * Snifft anhand des gefundenen Tokens.
-     *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -30,10 +25,10 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
     }
 
     /**
-     * Prüft, ob die Methode an $index einen DocBlock benötigt.
+     * Checks if the method is in need of a docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param int                  $index
      *
      * @return bool
      */

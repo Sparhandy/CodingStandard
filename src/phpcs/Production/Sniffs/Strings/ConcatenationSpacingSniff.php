@@ -1,6 +1,6 @@
 <?php
 /**
- * Makes sure there are no spaces between the concatenation operator (.) and
+ * Makes sure there are spaces between the concatenation operator (.) and
  * the strings being concatenated.
  *
  * @author    Stefano Kowalke <blueduck@gmx.net>
@@ -10,9 +10,7 @@
 class Production_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSniffer_Sniff
 {
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -20,10 +18,7 @@ class Production_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSni
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPointer The position of the current token in the stack passed in $tokens
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -44,13 +39,12 @@ class Production_Sniffs_Strings_ConcatenationSpacingSniff implements PHP_CodeSni
             || ($nextToken['code'] === T_WHITESPACE && stristr($nextToken['content'], '  ') !== false)
         )
         {
-            // Dieser IF, damit Einrückungen bei einem Multi-Line String Concat keine Fehler werfen
+            // Indents in multi-line concatenations must not throw warnings.
             if ($currentToken['code'] === T_STRING_CONCAT && $prevToken['code'] === T_WHITESPACE)
             {
                 return;
             }
 
-            // Ansonsten ist es wirklich ein Fehler:
             $error = 'Concat operator should be surrounded by just one space';
             $phpcsFile->addWarning($error, $stackPointer, 'OnlyOneSpaceAroundConcat');
         }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Prüft, auf fehlende Memberdefaults.
+ * Checks for missing member defaults.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
  */
@@ -17,9 +18,7 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
     ];
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -32,10 +31,7 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
     }
 
     /**
-     * Durchlaufe diesen Prozess, wenn eines der registrierten 'tokens' auftritt.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile die durchsuchte Datei
-     * @param int                  $stackPointer Die Position des aktuellen 'tokens' im $tockens Stapel
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -43,21 +39,21 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
     {
         $tokens = $phpcsFile->getTokens();
 
-        $memberCandidate    = $tokens[$stackPointer + 2];
+        $memberCandidate = $tokens[$stackPointer + 2];
         $semicolonCandidate = $tokens[$stackPointer + 3];
-        $equalsCandidate    = $tokens[$stackPointer + 4];
-        $valueCandidate     = $tokens[$stackPointer + 6];
+        $equalsCandidate = $tokens[$stackPointer + 4];
+        $valueCandidate = $tokens[$stackPointer + 6];
 
-        $isMemberVariable            = $memberCandidate['type'] === 'T_VARIABLE';
+        $isMemberVariable = $memberCandidate['type'] === 'T_VARIABLE';
         $memberVariableWithSemicolon = $semicolonCandidate['type'] === 'T_SEMICOLON';
-        $memberVariableWithEquals    = $equalsCandidate['type'] === 'T_EQUALS';
-        $isValidValueType            = in_array($valueCandidate['type'], $this->validValueTypes, true);
+        $memberVariableWithEquals = $equalsCandidate['type'] === 'T_EQUALS';
+        $isValidValueType = in_array($valueCandidate['type'], $this->validValueTypes, true);
 
         if ($isMemberVariable && $memberVariableWithSemicolon && !$memberVariableWithEquals && !$isValidValueType)
         {
-            $type  = 'Membervariable without default value';
-            $data  = $memberCandidate['content'];
-            $error = 'Membervariable ' . $memberCandidate['content'] . ' without default value';
+            $type = 'Member variable without default value';
+            $data = $memberCandidate['content'];
+            $error = 'Member variable ' . $memberCandidate['content'] . ' without default value';
             $phpcsFile->addWarning($error, $stackPointer, $type, $data);
         }
     }
