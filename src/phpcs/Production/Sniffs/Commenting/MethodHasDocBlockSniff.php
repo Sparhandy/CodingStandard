@@ -28,7 +28,7 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
      * Checks if the method declaration is in need of a docblock.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */

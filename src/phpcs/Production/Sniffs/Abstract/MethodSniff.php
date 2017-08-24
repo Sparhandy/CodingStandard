@@ -54,7 +54,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token at position of $index corresponds to a whitespace character.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -67,7 +67,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token at position of $index corresponds to a linefeed.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -87,7 +87,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token at position of $index corresponds to a whitespace inside of a comment.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -100,7 +100,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token at position of $index corresponds to the start of a comment.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -113,7 +113,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token at position of $index inside a comment corresponds to a text.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -126,7 +126,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token at position of $index corresponds to a test annotation.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -141,7 +141,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token at position of $index corresponds to an instance of $type.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      * @param string               $type
      *
      * @return bool
@@ -157,7 +157,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * CChecks if the token at position of $index corresponds to a method modifier.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -173,7 +173,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Checks if the token in this method is marked as a test.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -223,7 +223,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
      * Adds a warning.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      * @param string               $errorMessage
      *
      * @return void

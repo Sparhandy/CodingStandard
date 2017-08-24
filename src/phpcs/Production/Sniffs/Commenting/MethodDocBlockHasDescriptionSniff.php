@@ -27,7 +27,7 @@ class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Pro
      * Checks if the methods docblock contains a description.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -53,7 +53,7 @@ class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Pro
      * Checks if the method annotation is in need of a description.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
