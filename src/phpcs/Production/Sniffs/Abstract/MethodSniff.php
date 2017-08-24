@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract class for sniffs relating to methods.
+ * Abstract class to be used by sniffs relating to methods.
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
@@ -23,8 +23,8 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks for the existence of a method docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
-     * @param int                  $indexOfFunctionToken
+     * @param PHP_CodeSniffer_File $sniffedFile          file to be checked
+     * @param int                  $indexOfFunctionToken position of current token in token list
      *
      * @return bool
      */
@@ -51,9 +51,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token is a whitespace.
+     * Checks if the token at position of $index corresponds to a whitespace character.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -64,9 +64,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token is a linefeed.
+     * Checks if the token at position of $index corresponds to a linefeed.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -84,9 +84,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token inside a comment is a whitespace.
+     * Checks if the token at position of $index corresponds to a whitespace inside of a comment.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -97,9 +97,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token is the start of a comment.
+     * Checks if the token at position of $index corresponds to the start of a comment.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -110,9 +110,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token inside a comment is text.
+     * Checks if the token at position of $index inside a comment corresponds to a text.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -123,9 +123,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token is a test annotation.
+     * Checks if the token at position of $index corresponds to a test annotation.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -138,9 +138,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token is an instance of $type.
+     * Checks if the token at position of $index corresponds to an instance of $type.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      * @param string               $type
      *
@@ -154,9 +154,9 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token describes the method visibility or if it is declared as abstract, static or final.
+     * CChecks if the token at position of $index corresponds to a method modifier.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -172,7 +172,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token in this method is marked as a test.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -222,7 +222,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Adds a warning.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      * @param string               $errorMessage
      *

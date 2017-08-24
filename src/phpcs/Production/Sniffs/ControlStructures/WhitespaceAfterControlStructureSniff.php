@@ -1,6 +1,6 @@
 <?php
 /**
- * Checks if there is a whitespace after the control structure.
+ * Checks for whitespaces after control structures.
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
@@ -48,7 +48,7 @@ class Production_Sniffs_ControlStructures_WhitespaceAfterControlStructureSniff i
         {
             return;
         }
-        $type  = 'No whitespace after control structure allowed.';
+        $type  = 'Whitespaces are not allowed after control structures.';
         $data  = [$tokens[$stackPointer]['content']];
         $error = 'There must be a whitespace after ' . $tokens[$stackPointer]['content'] . '.';
         $phpcsFile->addWarning($error, $stackPointer, $type, $data);

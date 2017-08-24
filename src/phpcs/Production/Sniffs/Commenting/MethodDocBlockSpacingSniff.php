@@ -22,7 +22,7 @@ class Production_Sniffs_Commenting_MethodDocBlockSpacingSniff extends Production
         $numberOfLineFeeds = $this->numberOfLineFeedsBetweenDocBlockAndDeclaration($sniffedFile, $index);
         if ($numberOfLineFeeds > 1)
         {
-            $this->addWarning($sniffedFile, $index, 'No empty lines between a method and its docblock.');
+            $this->addWarning($sniffedFile, $index, 'No empty lines between a method declaration and its docblock.');
         }
         elseif ($numberOfLineFeeds === 0)
         {
@@ -31,10 +31,10 @@ class Production_Sniffs_Commenting_MethodDocBlockSpacingSniff extends Production
     }
 
     /**
-     * Counts the linefeeds between a method and its docblock.
+     * Counts the linefeeds between a method declaration and its docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
-     * @param int                  $indexOfFunctionToken
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
+     * @param int                  $indexOfFunctionToken position of current token in token list
      *
      * @return int
      */

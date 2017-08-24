@@ -1,6 +1,6 @@
 <?php
 /**
- * Checks if the method annotation contains a description.
+ * Checks if the methods docblock contains a description.
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
@@ -24,9 +24,9 @@ class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Pro
     }
 
     /**
-     * Checks if the method annotation contains a description.
+     * Checks if the methods docblock contains a description.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool
@@ -52,7 +52,7 @@ class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Pro
     /**
      * Checks if the method annotation is in need of a description.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index
      *
      * @return bool

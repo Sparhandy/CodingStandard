@@ -1,6 +1,6 @@
 <?php
 /**
- * Checks for missing member defaults.
+ * Checks for missing default values of class properties.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
  */
