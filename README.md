@@ -1,3 +1,5 @@
+Build Status of branch master [![Build Status](https://travis-ci.org/Sparhandy/CodingStandard.svg?branch=master)](https://travis-ci.org/Sparhandy/CodingStandard)
+
 # Sparhandy Coding Standard
 
 This repository contains all necessary files to configure PHP Code Sniffer and PHP Mess Detector according to our coding standard. 
