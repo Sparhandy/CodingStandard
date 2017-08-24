@@ -16,7 +16,7 @@ composer require "sparhandy/codingstandard" "dev-master"
 
 To execute PHP Code Sniffer configured for sparhandy coding standards do the following.
 ```bash
-vendor/squizlabs/php_codesniffer/scripts/phpcs --extensions=php --standard=./vendor/sparhandy/codingstandard/src/phpcs/Production/ruleset.xml ./path/to ./your/sources 
+./vendor/bin/phpcs --extensions=php --standard=./vendor/sparhandy/codingstandard/src/phpcs/Production/ruleset.xml ./path/to ./your/sources 
 ```
 
 To execute PHP Code Sniffer configured for sparhandy coding standards do the following.
