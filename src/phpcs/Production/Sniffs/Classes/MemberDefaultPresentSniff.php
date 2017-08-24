@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Checks for missing member defaults.
  *

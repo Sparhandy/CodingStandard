@@ -170,7 +170,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token on this method is marked as a test.
+     * Checks if the token in this method is marked as a test.
      *
      * @param PHP_CodeSniffer_File $sniffedFile
      * @param int                  $index
@@ -196,7 +196,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token on this method is a data provider.
+     * Checks if the token in this method is a data provider.
      *
      * @param string $methodName
      *
@@ -208,7 +208,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Checks if the token on this method is an accessor (getter / setter / injector).
+     * Checks if the token in this method is an accessor (getter / setter / injector).
      *
      * @param string $methodName
      *
