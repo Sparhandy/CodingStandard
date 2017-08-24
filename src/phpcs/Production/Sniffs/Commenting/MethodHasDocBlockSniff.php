@@ -20,7 +20,7 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
     {
         if ($this->methodNeedsDocBlock($sniffedFile, $index) && !$this->hasMethodDocBlock($sniffedFile, $index))
         {
-            $this->addWarning($sniffedFile, $index, 'Die Methode hat keinen DocBlock. Bitte dokumentieren.');
+            $this->addWarning($sniffedFile, $index, 'Methods must have a docblock.');
         }
     }
 
