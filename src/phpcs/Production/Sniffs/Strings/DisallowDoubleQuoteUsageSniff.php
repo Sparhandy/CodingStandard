@@ -2,7 +2,7 @@
 /**
  * Prevent usage of Double Quotes in favour of single quotes combined with CR, LF, CRLF etc constants.
  *
- * @author Jens von der Heydt <jheydt@pietzpluswild.de>
+ * @author Jens von der Heydt <jens.heydt@ppw.de>
  */
 class Production_Sniffs_Strings_DisallowDoubleQuoteUsageSniff implements PHP_CodeSniffer_Sniff
 {
