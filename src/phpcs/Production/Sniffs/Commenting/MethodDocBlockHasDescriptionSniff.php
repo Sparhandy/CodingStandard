@@ -56,6 +56,10 @@ class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Pro
      * @param int                  $index position of current token in token list
      *
      * @return bool
+     *
+     * @throws PHP_CodeSniffer_Exception If the specified token is not of type
+     *                                   T_FUNCTION, T_CLASS, T_ANON_CLASS,
+     *                                   T_TRAIT or T_INTERFACE.
      */
     private function needsMethodDocBlockDescription(PHP_CodeSniffer_File $sniffedFile, $index)
     {

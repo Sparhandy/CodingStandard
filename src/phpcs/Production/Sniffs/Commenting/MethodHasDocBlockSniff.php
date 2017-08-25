@@ -15,6 +15,10 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
      * {@inheritdoc}
      *
      * @return void
+     *
+     * @throws PHP_CodeSniffer_Exception If the specified token is not of type
+     *                                   T_FUNCTION, T_CLASS, T_ANON_CLASS,
+     *                                   T_TRAIT or T_INTERFACE.
      */
     public function process(PHP_CodeSniffer_File $sniffedFile, $index)
     {
@@ -31,6 +35,10 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
      * @param int                  $index position of current token in token list
      *
      * @return bool
+     *
+     * @throws PHP_CodeSniffer_Exception If the specified token is not of type
+     *                                   T_FUNCTION, T_CLASS, T_ANON_CLASS,
+     *                                   T_TRAIT or T_INTERFACE.
      */
     private function methodNeedsDocBlock(PHP_CodeSniffer_File $sniffedFile, $index)
     {

@@ -10,6 +10,8 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
 {
     /**
      * Constructs a PSR1_Sniffs_Methods_CamelCapsMethodNameSniff.
+     *
+     * @throws PHP_CodeSniffer_Exception If the specified tokens array is empty.
      */
     public function __construct()
     {
@@ -24,6 +26,10 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
      * @param int                  $currScope The position of the current scope.
      *
      * @return void
+     *
+     * @throws PHP_CodeSniffer_Exception If the specified token is not of type
+     *                                   T_FUNCTION, T_CLASS, T_ANON_CLASS,
+     *                                   T_TRAIT or T_INTERFACE.
      */
     protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPointer, $currScope)
     {
