@@ -1,4 +1,4 @@
-Build Status of branch master [![Build Status](https://travis-ci.org/Sparhandy/CodingStandard.svg?branch=master)](https://travis-ci.org/Sparhandy/CodingStandard)
+[![Build Status](https://travis-ci.org/Sparhandy/CodingStandard.svg?branch=master)](https://travis-ci.org/Sparhandy/CodingStandard) [![Github Releases](https://img.shields.io/github/downloads/Sparhandy/CodingStandard/latest/total.svg)]() [![Release](https://img.shields.io/github/release/Sparhandy/CodingStandard.svg)]() [![Packagist](https://img.shields.io/packagist/l/Sparhandy/CodingStandard.svg)]()
 
 # Sparhandy Coding Standard
 
@@ -16,12 +16,15 @@ composer require "sparhandy/codingstandard" "dev-master"
 
 ### From Terminal (Cli)
 
+#### PHP Code Sniffer
+
 To execute PHP Code Sniffer configured for sparhandy coding standards do the following.
 ```bash
 ./vendor/bin/phpcs --extensions=php --standard=./vendor/sparhandy/codingstandard/src/phpcs/Production/ruleset.xml ./path/to ./your/sources 
 ```
 
-To execute PHP Code Sniffer configured for sparhandy coding standards do the following.
+#### PHP Mess Detector
+To execute PHP Mess Detector configured for sparhandy coding standards do the following.
 ```bash
 ./vendor/bin/phpmd ./path/to ./your/sources text ./vendor/sparhandy/codingstandard/src/phpmd/phpmd.xml --suffixes php
 ```
@@ -61,8 +64,7 @@ If you want to contribute to the standard here is how it works.
 * Push your branch to your fork.
 * Create a pull request on GitHub.
 * Discuss your pull request with us.
-* Our devs will then merge or close the PR.
+* Our devs will then merge or close the pull request.
 
 # Acknowledgements
-This would not be possible without the tremendous work of the good people at [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) and [PHP Mess Detector](https://github.com/phpmd/phpmd) and of cause the authors annotated in the source files.
-
+This would not be possible without the tremendous work of the good people at [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) and [PHP Mess Detector](https://github.com/phpmd/phpmd) and of course the authors annotated in the source files.
