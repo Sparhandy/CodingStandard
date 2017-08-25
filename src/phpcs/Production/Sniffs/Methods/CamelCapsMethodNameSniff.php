@@ -48,7 +48,7 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
         if (PHP_CodeSniffer::isCamelCaps($testName, false, true, false) === false)
         {
             $className = $phpcsFile->getDeclarationName($currScope);
-            if ($this->isUnitTest($phpcsFile, $stackPointer, $currScope) === false)
+            if ($this->isUnitTest($phpcsFile, $stackPointer) === false)
             {
                 $error     = 'Method name "%s" is not in camel caps format';
                 $errorData = [$className . '::' . $methodName];
