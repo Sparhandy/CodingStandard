@@ -3,7 +3,7 @@
  * Ensures method names are defined using camel case.
  *
  * @author Greg Sherwood <gsherwood@squiz.net>
- * @author Jens von der Heydt <jens.vonderHeydt@sh.de>
+ * @author Jens von der Heydt <jens.heydt@ppw.de>
  * @author Alexander Christmann <alexander.christmann@sh.de>
  */
 class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
