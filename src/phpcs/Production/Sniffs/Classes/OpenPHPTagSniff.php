@@ -1,15 +1,13 @@
 <?php
 /**
- * Es wird auf das richtige Vorkommen von PHP-Open-Tag geprüft.
+ * Checks if the opening php tag is used the way we want it to.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
  */
 class Production_Sniffs_Classes_OpenPHPTagSniff implements PHP_CodeSniffer_Sniff
 {
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -20,10 +18,7 @@ class Production_Sniffs_Classes_OpenPHPTagSniff implements PHP_CodeSniffer_Sniff
     }
 
     /**
-     * Durchlaufe diesen Prozess, wenn eines der registrierten 'tokens' auftritt.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile Die durchsuchte Datei.
-     * @param int                  $stackPointer Die Position des aktuellen 'tokens' im $tockens Stapel
+     * {@inheritdoc}
      *
      * @return void
      */

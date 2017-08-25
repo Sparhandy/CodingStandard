@@ -3,7 +3,7 @@
  * Ensures method names are defined using camel case.
  *
  * @author Greg Sherwood <gsherwood@squiz.net>
- * @author Jens von der Heydt <jens.vonderHeydt@sh.de>
+ * @author Jens von der Heydt <jheydt@pietzpluswild.de>
  * @author Alexander Christmann <alexander.christmann@sh.de>
  */
 class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
@@ -63,7 +63,7 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
     }
 
     /**
-     * Prüft, ob die gesniffte Methode ein Unit-Test ist.
+     * Checks if the method is marked as a unit test.
      *
      * @param PHP_CodeSniffer_File $phpcsFile
      * @param int                  $stackPointer

@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft auf das Vorhandensein von Oktalzahlen in Arrays, zuweisungen und Übergabeparametern.
+ * Checks for the existence of octal numbers in arrays, assignments and parameter values.
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Thorsten Müller <thorsten.mueller@sh.de>
@@ -8,9 +8,7 @@
 class Production_Sniffs_Php_OctalValuePresentSniff
 {
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return string[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -20,10 +18,7 @@ class Production_Sniffs_Php_OctalValuePresentSniff
     }
 
     /**
-     * Durchlaufe diesen Prozess, wenn eines der registrierten Tokens auftritt.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile    Die durchsuchte Datei.
-     * @param int                  $stackPointer Die Position des aktuellen Tokens im $tokens-Stack.
+     * {@inheritdoc}
      *
      * @return void
      */

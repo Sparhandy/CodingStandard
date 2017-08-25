@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft, auf fehlende Memberdefaults.
+ * Checks for missing default values of class properties.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
  */
@@ -17,9 +17,7 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
     ];
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -32,10 +30,7 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
     }
 
     /**
-     * Durchlaufe diesen Prozess, wenn eines der registrierten 'tokens' auftritt.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile die durchsuchte Datei
-     * @param int                  $stackPointer Die Position des aktuellen 'tokens' im $tockens Stapel
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -55,9 +50,9 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
 
         if ($isMemberVariable && $memberVariableWithSemicolon && !$memberVariableWithEquals && !$isValidValueType)
         {
-            $type  = 'Membervariable without default value';
+            $type  = 'Member variable without default value';
             $data  = $memberCandidate['content'];
-            $error = 'Membervariable ' . $memberCandidate['content'] . ' without default value';
+            $error = 'Member variable ' . $memberCandidate['content'] . ' without default value';
             $phpcsFile->addWarning($error, $stackPointer, $type, $data);
         }
     }

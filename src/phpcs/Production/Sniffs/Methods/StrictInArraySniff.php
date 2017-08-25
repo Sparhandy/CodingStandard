@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft alle Vorkommen von 'in_array' auf Typsicherheit.
+ * Checks if the 'strict' parameter is set to true in in_array calls.
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
@@ -16,9 +16,7 @@ class Production_Sniffs_Methods_StrictInArraySniff
     public $supportedTokenizers = ['PHP'];
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -26,10 +24,7 @@ class Production_Sniffs_Methods_StrictInArraySniff
     }
 
     /**
-     * Processes this sniff, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPointer The position of the current token in the stack passed in $tokens
+     * {@inheritdoc}
      *
      * @return void
      */
