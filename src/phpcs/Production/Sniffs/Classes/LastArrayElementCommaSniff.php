@@ -1,6 +1,6 @@
 <?php
 /**
- * Checks for the existence of a comma at the last element of an array
+ * Checks for the existence of a comma at the last element of an array.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
  */

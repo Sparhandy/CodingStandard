@@ -63,7 +63,7 @@ class Production_Sniffs_Classes_EmptyLinesParenthesisSniff implements PHP_CodeSn
     }
 
     /**
-     * Checks for two consecutive linefeeds at the $stackPointer's position
+     * Checks for two consecutive linefeeds at the $stackPointer's position.
      *
      * @param string[] $tokens
      * @param int      $stackPointer

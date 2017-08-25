@@ -1,6 +1,6 @@
 <?php
 /**
- * Checks if the @Inject and @Injectable annotation is used the way we want it to.
+ * Checks the correct usage of @Inject and @Injectable annotations.
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>

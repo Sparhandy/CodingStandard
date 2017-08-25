@@ -1,6 +1,6 @@
 <?php
 /**
- * Prevent usage of Double Quotes in favour of single quotes combined with CR, LF, CRLF etc constants
+ * Prevent usage of Double Quotes in favour of single quotes combined with CR, LF, CRLF etc constants.
  *
  * @author Jens von der Heydt <jheydt@pietzpluswild.de>
  */

@@ -154,7 +154,7 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     }
 
     /**
-     * CChecks if the token at position of $index corresponds to a method modifier.
+     * Checks if the token at position of $index corresponds to a method modifier.
      *
      * @param PHP_CodeSniffer_File $sniffedFile file to be checked
      * @param int                  $index position of current token in token list
