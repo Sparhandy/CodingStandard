@@ -63,7 +63,7 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
     }
 
     /**
-     * Prüft, ob die gesniffte Methode ein Unit-Test ist.
+     * Checks if the method is marked as a unit test.
      *
      * @param PHP_CodeSniffer_File $phpcsFile
      * @param int                  $stackPointer

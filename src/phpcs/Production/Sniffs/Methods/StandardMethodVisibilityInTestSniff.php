@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft, ob die Visibility von teardown und setup auf protected stehen.
+ * Checks if the test methods setUp and tearDown are declared as protected.
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
@@ -24,9 +24,7 @@ class Production_Sniffs_Methods_StandardMethodVisibilityInTestSniff implements P
     const REQUIRED_MODIFIER = 'T_PROTECTED';
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -36,10 +34,7 @@ class Production_Sniffs_Methods_StandardMethodVisibilityInTestSniff implements P
     }
 
     /**
-     * Processes this sniff when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPointer The position of the current token in the stack passed in $tokens
+     * {@inheritdoc}
      *
      * @return void
      */

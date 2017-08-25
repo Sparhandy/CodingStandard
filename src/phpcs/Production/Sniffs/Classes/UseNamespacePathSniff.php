@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft auf vollständig qualifizierte Namespace-Namen in der "@var, @param, @return und @throws" Annotation.
+ * Checks for fully qualified namespaces in @var, @param, @return and @throws annotations.
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
@@ -29,15 +29,11 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
         '@return',
     ];
 
-    /**
-     * @var PHP_CodeSniffer_File
-     */
+    /** @var PHP_CodeSniffer_File $file */
     private $file = null;
 
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -49,10 +45,7 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Processes this sniff when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPointer The position of the current token in the stack passed in $tokens
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -75,7 +68,7 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Entfernt den Variablenbezeichner in den Kommentarstrings.
+     * Removes variable names in comments.
      *
      * @param string $commentContent
      *
@@ -90,7 +83,7 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Sammelt alle Namespaces in der Use-Deklaration zum Vergleich.
+     * Collects all namespaces in use statements.
      *
      * @param string[][] $tokens
      * @param int        $stackPointer
@@ -125,7 +118,7 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
     }
 
     /**
-     * Sucht nach voll-qualifizierten-Namespaces in den DocBlock-Kommentaren. Bei Erfolg werden diese als Warnung markiert.
+     * Looks for fully qualified namespaces in docblock comments. If there is a match, it will be marked as warning.
      *
      * @param string[][] $tokens
      * @param int        $stackPointer
@@ -148,9 +141,9 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
                 $this->file->addWarning($error, $stackPointer, $type, $data);
             }
 
-            $type  = 'Full qualified namespace found.';
+            $type  = 'Fully qualified namespace found.';
             $data  = [$tokens[$stackPointer + 2]['content']];
-            $error = 'Full qualified namespace in ' . $commentContext . ' annotation.';
+            $error = 'Fully qualified namespace in ' . $commentContext . ' annotation.';
             $this->file->addWarning($error, $stackPointer, $type, $data);
         }
     }

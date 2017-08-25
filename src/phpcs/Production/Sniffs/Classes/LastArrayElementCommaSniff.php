@@ -1,15 +1,13 @@
 <?php
 /**
- * Prüft auf das Vorhandensein eines Kommas beim letzten Arrayelement.
+ * Checks for the existence of a comma at the last element of an array.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
  */
 class Production_Sniffs_Classes_LastArrayElementCommaSniff implements PHP_CodeSniffer_Sniff
 {
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -17,10 +15,7 @@ class Production_Sniffs_Classes_LastArrayElementCommaSniff implements PHP_CodeSn
     }
 
     /**
-     * Durchlaufe diesen Prozess, wenn eines der registrierten Tokens auftritt.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile Die durchsuchte Datei.
-     * @param int                  $stackPointer Die Position des aktuellen Tokens im $tokens-Stack
+     * {@inheritdoc}
      *
      * @return void
      */

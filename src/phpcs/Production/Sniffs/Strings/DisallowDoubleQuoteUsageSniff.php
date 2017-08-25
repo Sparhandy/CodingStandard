@@ -1,15 +1,13 @@
 <?php
 /**
- * Prevent usage of Double Quotes in favour of single quotes combined with CR, LF, CRLF etc constants
+ * Prevent usage of Double Quotes in favour of single quotes combined with CR, LF, CRLF etc constants.
  *
  * @author Jens von der Heydt <jens.heydt@ppw.de>
  */
 class Production_Sniffs_Strings_DisallowDoubleQuoteUsageSniff implements PHP_CodeSniffer_Sniff
 {
     /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return int[]
+     * {@inheritdoc}
      */
     public function register()
     {
@@ -20,10 +18,7 @@ class Production_Sniffs_Strings_DisallowDoubleQuoteUsageSniff implements PHP_Cod
     }
 
     /**
-     * Processes this test, when one of its tokens is encountered.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
-     * @param int                  $stackPointer The position of the current token in the stack passed in $tokens
+     * {@inheritdoc}
      *
      * @return void
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft auf das Vorhandensein von DocBlocks in Methoden sowie auf die @return-Annotation.
+ * Checks for the existence of a methods docblock as well as the @return annotation inside the docblock.
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
@@ -8,16 +8,11 @@
  */
 class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sniffs_Abstract_MethodSniff
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $methodNamesWithoutNecessaryDocBlock = ['setUp', 'tearDown', 'setUpTest', 'tearDownTest'];
 
     /**
-     * Snifft anhand des gefundenen Tokens.
-     *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -25,15 +20,15 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
     {
         if ($this->methodNeedsDocBlock($sniffedFile, $index) && !$this->hasMethodDocBlock($sniffedFile, $index))
         {
-            $this->addWarning($sniffedFile, $index, 'Die Methode hat keinen DocBlock. Bitte dokumentieren.');
+            $this->addWarning($sniffedFile, $index, 'Methods must have a docblock.');
         }
     }
 
     /**
-     * Prüft, ob die Methode an $index einen DocBlock benötigt.
+     * Checks if the method declaration is in need of a docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */

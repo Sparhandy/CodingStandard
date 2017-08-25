@@ -1,6 +1,6 @@
 <?php
 /**
- * Prüft, dass ein Methodenkommentar eine Beschreibung hat.
+ * Checks if the methods docblock contains a description.
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
@@ -8,10 +8,7 @@
 class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Production_Sniffs_Abstract_MethodSniff
 {
     /**
-     * Snifft anhand des gefundenen Tokens.
-     *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * {@inheritdoc}
      *
      * @return void
      */
@@ -22,15 +19,15 @@ class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Pro
             && !$this->hasMethodDocBlockDescription($sniffedFile, $index)
         )
         {
-            $this->addWarning($sniffedFile, $index, 'Der DocBlock der Methode hat keine Description am Anfang.');
+            $this->addWarning($sniffedFile, $index, 'There is no description at the beginning of this docblock.');
         }
     }
 
     /**
-     * Prüft, ob der DocBlock der Methode an $index eine Beschreibung hat.
+     * Checks if the methods docblock contains a description.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
@@ -53,10 +50,10 @@ class Production_Sniffs_Commenting_MethodDocBlockHasDescriptionSniff extends Pro
     }
 
     /**
-     * Prüft, ob die Methode an $index eine Beschreibung im DocBlock braucht.
+     * Checks if the method annotation is in need of a description.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile durchsuchte Datei
-     * @param int                  $index Position des aktuellen Tokens in der Tokens-Liste
+     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
+     * @param int                  $index position of current token in token list
      *
      * @return bool
      */
