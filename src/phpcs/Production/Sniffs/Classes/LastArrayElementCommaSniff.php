@@ -1,10 +1,16 @@
 <?php
+namespace Sparhandy\Sniffs\Classes;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks for the existence of a comma at the last element of an array.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Classes_LastArrayElementCommaSniff implements PHP_CodeSniffer_Sniff
+class LastArrayElementCommaSniff implements Sniff
 {
     /**
      * {@inheritdoc}
@@ -19,7 +25,7 @@ class Production_Sniffs_Classes_LastArrayElementCommaSniff implements PHP_CodeSn
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens       = $phpcsFile->getTokens();
         $currentToken = $tokens[$stackPointer];
@@ -39,7 +45,7 @@ class Production_Sniffs_Classes_LastArrayElementCommaSniff implements PHP_CodeSn
 
         if ($hasClosingParenthesis && $hasLinebreakBeforeClosingParenthesis && !$hasCommaAfterLastElement)
         {
-            $type  = 'Array element without comma.';
+            $type  = 'Production.LastArrayElementComma.ArrayElementWithoutComma';
             $data  = $commaCandidate['content'];
             $error = 'Array element without comma: ' . $commaCandidate['line'];
             $phpcsFile->addWarning($error, $closingParenthesisCandidate - 3, $type, $data);

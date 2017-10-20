@@ -1,11 +1,17 @@
 <?php
+namespace Sparhandy\Sniffs\Methods;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks if the test methods setUp and tearDown are declared as protected.
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Methods_StandardMethodVisibilityInTestSniff implements PHP_CodeSniffer_Sniff
+class StandardMethodVisibilityInTestSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -24,7 +30,9 @@ class Production_Sniffs_Methods_StandardMethodVisibilityInTestSniff implements P
     const REQUIRED_MODIFIER = 'T_PROTECTED';
 
     /**
-     * {@inheritdoc}
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return int[]
      */
     public function register()
     {
@@ -38,7 +46,7 @@ class Production_Sniffs_Methods_StandardMethodVisibilityInTestSniff implements P
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens = $phpcsFile->getTokens();
 

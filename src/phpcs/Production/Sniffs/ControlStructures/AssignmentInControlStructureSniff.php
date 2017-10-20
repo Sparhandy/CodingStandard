@@ -1,14 +1,22 @@
 <?php
+namespace Sparhandy\Sniffs\ControlStructures;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks for the existence of an assignment inside a control structure.
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andy Grunwald <andygrunwald@gmail.com>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_ControlStructures_AssignmentInControlStructurSniff implements PHP_CodeSniffer_Sniff
+class AssignmentInControlStructureSniff implements Sniff
 {
     /**
-     * {@inheritdoc}
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return int[]
      */
     public function register()
     {
@@ -19,11 +27,14 @@ class Production_Sniffs_ControlStructures_AssignmentInControlStructurSniff imple
     }
 
     /**
-     * {@inheritdoc}
+     * Processes this sniff when one of its tokens is encountered.
+     *
+     * @param File $phpcsFile The file being scanned.
+     * @param int  $stackPointer The position of the current token in the stack passed in $tokens
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -40,7 +51,7 @@ class Production_Sniffs_ControlStructures_AssignmentInControlStructurSniff imple
 
         if ($braceBeforeParenthesis === $parenthesisPositionStart)
         {
-            $type  = 'Assignments in conditions';
+            $type  = 'Production.AssignmentInControlStructure.AssignmentsInConditions';
             $data  = [$tokens[$stackPointer]['content']];
             $error = 'Please extract the assignment before the condition.';
             $phpcsFile->addWarning($error, $stackPointer, $type, $data);

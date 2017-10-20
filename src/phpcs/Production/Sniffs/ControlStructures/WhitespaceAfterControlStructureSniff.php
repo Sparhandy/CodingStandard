@@ -1,11 +1,17 @@
 <?php
+namespace Sparhandy\Sniffs\ControlStructures;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks for whitespaces after control structures.
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_ControlStructures_WhitespaceAfterControlStructureSniff implements PHP_CodeSniffer_Sniff
+class WhitespaceAfterControlStructureSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -18,7 +24,9 @@ class Production_Sniffs_ControlStructures_WhitespaceAfterControlStructureSniff i
     const WANTED_TOKEN = 'T_WHITESPACE';
 
     /**
-     * {@inheritdoc}
+     * Returns an array of tokens this test wants to listen for.
+     *
+     * @return int[]
      */
     public function register()
     {
@@ -41,16 +49,16 @@ class Production_Sniffs_ControlStructures_WhitespaceAfterControlStructureSniff i
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens = $phpcsFile->getTokens();
         if ($tokens[$stackPointer + 1]['type'] === self::WANTED_TOKEN)
         {
             return;
         }
-        $type  = 'Whitespaces are not allowed after control structures.';
+        $type  = 'Production.WhitespaceAfterControlStructure.KeinWhitespaceNachKontrollstruktor';
         $data  = [$tokens[$stackPointer]['content']];
-        $error = 'There must be a whitespace after ' . $tokens[$stackPointer]['content'] . '.';
+        $error = 'There must be a whitespace after ' . $tokens[$stackPointer]['content'] . ' .';
         $phpcsFile->addWarning($error, $stackPointer, $type, $data);
     }
 }

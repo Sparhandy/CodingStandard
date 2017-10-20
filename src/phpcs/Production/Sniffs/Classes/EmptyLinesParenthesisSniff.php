@@ -1,12 +1,19 @@
 <?php
+namespace Sparhandy\Sniffs\Classes;
+
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Files\File;
+use UnexpectedValueException;
+
 /**
- * Checks if there are no linefeeds after or before opening or closing curly braces.
+ * Checks if there are no line feeds after or before opening or closing curly braces.
  *
  * @author Andreas Borisov <andreas.borisov@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Classes_EmptyLinesParenthesisSniff implements PHP_CodeSniffer_Sniff
+class EmptyLinesParenthesisSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -31,7 +38,7 @@ class Production_Sniffs_Classes_EmptyLinesParenthesisSniff implements PHP_CodeSn
      *
      * @throws UnexpectedValueException
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens  = $phpcsFile->getTokens();
         $message = '';
@@ -56,7 +63,7 @@ class Production_Sniffs_Classes_EmptyLinesParenthesisSniff implements PHP_CodeSn
 
         if ($message !== '')
         {
-            $type = 'Empty Line found';
+            $type = 'Production.EmptyLinesParenthesis.EmptyLineFound';
             $data = $tokens[$stackPointer]['content'];
             $phpcsFile->addWarning($message, $stackPointer, $type, $data);
         }

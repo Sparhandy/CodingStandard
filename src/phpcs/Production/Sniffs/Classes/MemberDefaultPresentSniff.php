@@ -1,10 +1,16 @@
 <?php
+namespace Sparhandy\Sniffs\Classes;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks for missing default values of class properties.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSniffer_Sniff
+class MemberDefaultPresentSniff implements Sniff
 {
     /** @var string[] */
     private $validValueTypes = [
@@ -34,7 +40,7 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -50,9 +56,9 @@ class Production_Sniffs_Classes_MemberDefaultPresentSniff implements PHP_CodeSni
 
         if ($isMemberVariable && $memberVariableWithSemicolon && !$memberVariableWithEquals && !$isValidValueType)
         {
-            $type  = 'Member variable without default value';
+            $type  = 'Production.MemberDefaultPresent.MembervariableWithoutDefaultValue';
             $data  = $memberCandidate['content'];
-            $error = 'Member variable ' . $memberCandidate['content'] . ' without default value';
+            $error = 'Membervariable ' . $memberCandidate['content'] . ' without default value';
             $phpcsFile->addWarning($error, $stackPointer, $type, $data);
         }
     }

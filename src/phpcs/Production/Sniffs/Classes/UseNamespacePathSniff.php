@@ -1,11 +1,17 @@
 <?php
+namespace Sparhandy\Sniffs\Classes;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks for fully qualified namespaces in @var, @param, @return and @throws annotations.
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer_Sniff
+class UseNamespacePathSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -14,14 +20,10 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
      */
     public $supportedTokenizers = ['PHP'];
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $usePaths = [];
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $wantedAnnotations = [
         '@var',
         '@param',
@@ -29,7 +31,7 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
         '@return',
     ];
 
-    /** @var PHP_CodeSniffer_File $file */
+    /** @var File */
     private $file = null;
 
     /**
@@ -49,7 +51,7 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $this->file      = $phpcsFile;
         $tokens          = $phpcsFile->getTokens();
@@ -131,19 +133,19 @@ class Production_Sniffs_Classes_UseNamespacePathSniff implements PHP_CodeSniffer
         $compareContext = $tokens[$stackPointer + 2]['content'];
         $commentContent = substr($tokens[$stackPointer + 2]['content'], 1);
         $commentContent = $this->deleteVariableName($commentContent);
-        if (preg_match('/.*\\\\+.*/', $compareContext, $matches) !== 0)
+        if (preg_match('/.*\\\\+.*/', $compareContext) !== 0)
         {
             if (!in_array($commentContent, $this->usePaths, true))
             {
-                $type  = 'No class import found.';
+                $type  = 'Production.UseNamespacePath.NoClassImportFound';
                 $data  = [$tokens[$stackPointer + 2]['content']];
                 $error = 'Missing use statement for this type.';
                 $this->file->addWarning($error, $stackPointer, $type, $data);
             }
 
-            $type  = 'Fully qualified namespace found.';
+            $type  = 'Production.UseNamespacePath.FullQualifiedNamespaceFound';
             $data  = [$tokens[$stackPointer + 2]['content']];
-            $error = 'Fully qualified namespace in ' . $commentContext . ' annotation.';
+            $error = 'Full qualified namespace in ' . $commentContext . ' annotation.';
             $this->file->addWarning($error, $stackPointer, $type, $data);
         }
     }
