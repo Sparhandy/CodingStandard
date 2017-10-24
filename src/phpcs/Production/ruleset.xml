@@ -3,7 +3,7 @@
     <description>
         This is the Sparhandy coding standard (without the legacy code).
 
-        This standard has been tested with to work with PHP_CodeSniffer 2.3.
+        This standard has been tested to work with PHP_CodeSniffer 3.1.1.
     </description>
     <config name="testVersion" value="5.6" />
     <rule ref="./rulesetWithoutPHPC.xml"/>
