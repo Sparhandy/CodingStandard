@@ -25,7 +25,7 @@ class MethodDocBlockHasDescriptionSniff extends MethodSniff
             && !$this->hasMethodDocBlockDescription($sniffedFile, $index)
         )
         {
-            $this->addWarning($sniffedFile, $index, 'Der DocBlock der Methode hat keine Description am Anfang.');
+            $this->addWarning($sniffedFile, $index, 'There is no description at the beginning of this docblock.');
         }
     }
 

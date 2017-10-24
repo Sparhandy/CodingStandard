@@ -56,9 +56,9 @@ class WhitespaceAfterControlStructureSniff implements Sniff
         {
             return;
         }
-        $type  = 'Production.WhitespaceAfterControlStructure.KeinWhitespaceNachKontrollstruktor';
+        $type  = 'Production.WhitespaceAfterControlStructure.NoWhitespaceAfterControlStructure';
         $data  = [$tokens[$stackPointer]['content']];
-        $error = 'There must be a whitespace after ' . $tokens[$stackPointer]['content'] . ' .';
+        $error = 'There must be a whitespace after ' . $tokens[$stackPointer]['content'] . '.';
         $phpcsFile->addWarning($error, $stackPointer, $type, $data);
     }
 }
