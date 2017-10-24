@@ -63,7 +63,8 @@ class CamelCapsMethodNameSniff extends AbstractScopeSniff
                 $phpcsFile->addError($error, $stackPointer, 'Production.CamelCapsMethodName.NotCamelCaps', $errorData);
                 $phpcsFile->recordMetric($stackPointer, 'CamelCase method name', 'no');
             }
-        } else
+        }
+        else
         {
             $phpcsFile->recordMetric($stackPointer, 'CamelCase method name', 'yes');
         }

@@ -24,7 +24,7 @@ class WhitespaceAfterControlStructureSniff implements Sniff
     const WANTED_TOKEN = 'T_WHITESPACE';
 
     /**
-     * Returns an array of tokens this test wants to listen for.
+     * {@inheritdoc}
      *
      * @return int[]
      */

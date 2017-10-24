@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="PPW Coding Standard">
     <description>
-        This is the Sparhandy coding standard (without the legacy code).
+        This is the Sparhandy coding standard except version compatibility sniffs.
 
-        This standard has been tested to work with PHP_CodeSniffer 2.3.
+        This standard has been tested to work with PHP_CodeSniffer 3.1.0.
     </description>
 
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
@@ -71,9 +71,7 @@
     <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent"/>
     <rule ref="PEAR.WhiteSpace.ScopeClosingBrace"/>
 
-    <rule ref="PSR1.Classes.ClassDeclaration">
-        <exclude-pattern>*Sniff.php</exclude-pattern>
-    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration"/>
     <rule ref="PSR1.Files.SideEffects"/>
     <rule ref="PSR2.Classes.ClassDeclaration"/>
     <rule ref="PSR2.Classes.PropertyDeclaration"/>
@@ -86,9 +84,7 @@
 
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <rule ref="Squiz.Classes.ClassDeclaration"/>
-    <rule ref="Squiz.Classes.ClassFileName">
-        <exclude-pattern>*Sniff.php</exclude-pattern>
-    </rule>
+    <rule ref="Squiz.Classes.ClassFileName"/>
     <rule ref="Squiz.Classes.DuplicateProperty"/>
     <rule ref="Squiz.Classes.LowercaseClassKeywords"/>
     <rule ref="Squiz.Classes.SelfMemberReference"/>

@@ -27,10 +27,7 @@ class AssignmentInControlStructureSniff implements Sniff
     }
 
     /**
-     * Processes this sniff when one of its tokens is encountered.
-     *
-     * @param File $phpcsFile The file being scanned.
-     * @param int  $stackPointer The position of the current token in the stack passed in $tokens
+     * {@inheritdoc}
      *
      * @return void
      */

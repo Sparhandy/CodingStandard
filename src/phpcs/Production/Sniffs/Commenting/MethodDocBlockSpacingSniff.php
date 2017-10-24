@@ -29,7 +29,8 @@ class MethodDocBlockSpacingSniff extends MethodSniff
         if ($numberOfLineFeeds > 1)
         {
             $this->addWarning($sniffedFile, $index, 'No empty lines between a method declaration and its docblock.');
-        } elseif ($numberOfLineFeeds === 0)
+        }
+        elseif ($numberOfLineFeeds === 0)
         {
             $this->addWarning($sniffedFile, $index, 'The method and its docblock can\'t be in the same line.');
         }

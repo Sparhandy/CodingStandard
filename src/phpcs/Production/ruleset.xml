@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="PPW Coding Standard">
     <description>
-        This is the Sparhandy coding standard (without the legacy code).
+        This is the Sparhandy coding standard.
 
         This standard has been tested to work with PHP_CodeSniffer 3.1.1.
     </description>
