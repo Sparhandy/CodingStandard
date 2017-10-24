@@ -1,11 +1,17 @@
 <?php
+namespace Sparhandy\Sniffs\Abstracts;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Abstract class to be used by sniffs relating to methods.
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer_Sniff
+abstract class MethodSniff implements Sniff
 {
     /** @var string[] */
     protected $modifierTokenTypes = ['T_PRIVATE', 'T_PROTECTED', 'T_PUBLIC', 'T_ABSTRACT', 'T_STATIC', 'T_FINAL'];
@@ -23,12 +29,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks for the existence of a method docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile          file to be checked
-     * @param int                  $indexOfFunctionToken position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $indexOfFunctionToken position of current token in token list
      *
      * @return bool
      */
-    protected function hasMethodDocBlock(PHP_CodeSniffer_File $sniffedFile, $indexOfFunctionToken)
+    protected function hasMethodDocBlock(File $sniffedFile, $indexOfFunctionToken)
     {
         $positionOfClosingDocBlock = $sniffedFile->findPrevious([T_DOC_COMMENT_CLOSE_TAG], $indexOfFunctionToken);
         if ($positionOfClosingDocBlock === false)
@@ -53,12 +59,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index corresponds to a whitespace character.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isWhitespaceToken(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isWhitespaceToken(File $sniffedFile, $index)
     {
         return $this->isTokenOfType($sniffedFile, $index, 'T_WHITESPACE');
     }
@@ -66,12 +72,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index corresponds to a linefeed.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isLinefeedToken(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isLinefeedToken(File $sniffedFile, $index)
     {
         if (!$this->isWhitespaceToken($sniffedFile, $index))
         {
@@ -86,12 +92,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index corresponds to a whitespace inside of a comment.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isCommentWhitespaceToken(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isCommentWhitespaceToken(File $sniffedFile, $index)
     {
         return $this->isTokenOfType($sniffedFile, $index, 'T_DOC_COMMENT_WHITESPACE');
     }
@@ -99,12 +105,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index corresponds to the start of a comment.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isCommentStartToken(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isCommentStartToken(File $sniffedFile, $index)
     {
         return $this->isTokenOfType($sniffedFile, $index, 'T_DOC_COMMENT_STAR');
     }
@@ -112,12 +118,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index inside a comment corresponds to a text.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isCommentTextToken(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isCommentTextToken(File $sniffedFile, $index)
     {
         return $this->isTokenOfType($sniffedFile, $index, 'T_DOC_COMMENT_STRING');
     }
@@ -125,12 +131,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index corresponds to a test annotation.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isTestTagToken(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isTestTagToken(File $sniffedFile, $index)
     {
         $tokens = $sniffedFile->getTokens();
 
@@ -140,13 +146,13 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index corresponds to an instance of $type.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
-     * @param string               $type
+     * @param File   $sniffedFile file to be checked
+     * @param int    $index position of current token in token list
+     * @param string $type
      *
      * @return bool
      */
-    private function isTokenOfType(PHP_CodeSniffer_File $sniffedFile, $index, $type)
+    private function isTokenOfType(File $sniffedFile, $index, $type)
     {
         $tokens = $sniffedFile->getTokens();
 
@@ -156,12 +162,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token at position of $index corresponds to a method modifier.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isMethodModifierToken(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isMethodModifierToken(File $sniffedFile, $index)
     {
         $tokens = $sniffedFile->getTokens();
         $type   = $tokens[$index]['type'];
@@ -172,12 +178,12 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Checks if the token in this method is marked as a test.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    protected function isTestMethod(PHP_CodeSniffer_File $sniffedFile, $index)
+    protected function isTestMethod(File $sniffedFile, $index)
     {
         $indexOfOpeningDocBlock = $sniffedFile->findPrevious([T_DOC_COMMENT_OPEN_TAG], $index);
         $indexOfClosingDocBlock = $sniffedFile->findPrevious([T_DOC_COMMENT_CLOSE_TAG], $index);
@@ -222,14 +228,14 @@ abstract class Production_Sniffs_Abstract_MethodSniff implements PHP_CodeSniffer
     /**
      * Adds a warning.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
-     * @param string               $errorMessage
+     * @param File   $sniffedFile file to be checked
+     * @param int    $index position of current token in token list
+     * @param string $errorMessage
      *
      * @return void
      */
-    protected function addWarning(PHP_CodeSniffer_File $sniffedFile, $index, $errorMessage)
+    protected function addWarning(File $sniffedFile, $index, $errorMessage)
     {
-        $sniffedFile->addWarning($errorMessage, $index, 'MethodDocBlock');
+        $sniffedFile->addWarning($errorMessage, $index, 'Production.MethodDocBlock.Invalid');
     }
 }

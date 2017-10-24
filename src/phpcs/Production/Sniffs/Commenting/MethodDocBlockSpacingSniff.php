@@ -1,18 +1,24 @@
 <?php
+namespace Sparhandy\Sniffs\Commenting;
+
+use PHP_CodeSniffer\Files\File;
+use Sparhandy\Sniffs\Abstracts\MethodSniff;
+
 /**
  * Checks for the non-existence of an empty line between a method and its docblock.
  *
  * @author Oliver Klee <github@oliverklee.de>
  * @author Dimitri Kontsevoi <dimitri.kontsevoi@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Commenting_MethodDocBlockSpacingSniff extends Production_Sniffs_Abstract_MethodSniff
+class MethodDocBlockSpacingSniff extends MethodSniff
 {
     /**
      * {@inheritdoc}
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $sniffedFile, $index)
+    public function process(File $sniffedFile, $index)
     {
         if (!$this->hasMethodDocBlock($sniffedFile, $index))
         {
@@ -33,12 +39,12 @@ class Production_Sniffs_Commenting_MethodDocBlockSpacingSniff extends Production
     /**
      * Counts the linefeeds between a method declaration and its docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $indexOfFunctionToken position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $indexOfFunctionToken position of current token in token list
      *
      * @return int
      */
-    protected function numberOfLineFeedsBetweenDocBlockAndDeclaration(PHP_CodeSniffer_File $sniffedFile, $indexOfFunctionToken)
+    protected function numberOfLineFeedsBetweenDocBlockAndDeclaration(File $sniffedFile, $indexOfFunctionToken)
     {
         $indexOfClosingDocBlock = $sniffedFile->findPrevious([T_DOC_COMMENT_CLOSE_TAG], $indexOfFunctionToken);
         if ($indexOfClosingDocBlock === false)
@@ -56,5 +62,22 @@ class Production_Sniffs_Commenting_MethodDocBlockSpacingSniff extends Production
         }
 
         return $numberOfLineFeeds;
+    }
+
+    /**
+     * Processes a token that is found within the scope that this test is
+     * listening to.
+     *
+     * @param File $phpcsFile The file where this token was found.
+     * @param int  $stackPtr The position in the stack where this
+     *                                               token was found.
+     * @param int  $currScope The position in the tokens array that
+     *                                               opened the scope that this test is
+     *                                               listening for.
+     *
+     * @return void
+     */
+    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    {
     }
 }

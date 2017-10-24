@@ -15,13 +15,14 @@ matrix:
     - php: 7.0
     - php: 7.1
 
-before_script:
+before_install:
   - composer self-update
 
 install: travis_retry composer update
 
 script:
-  - ./vendor/bin/phpcs --extensions=php --standard=./src/phpcs/Production/ruleset.xml ./src
+  - ./vendor/bin/phpcs -sp --extensions=php --standard=Production ./src
+  - ./vendor/bin/phpmd src text src/phpmd/phpmd.xml --suffixes php
 
 # configure notifications (email, IRC, campfire etc)
 notifications:

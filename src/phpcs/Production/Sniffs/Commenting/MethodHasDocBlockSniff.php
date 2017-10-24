@@ -1,12 +1,18 @@
 <?php
+namespace Sparhandy\Sniffs\Commenting;
+
+use PHP_CodeSniffer\Files\File;
+use Sparhandy\Sniffs\Abstracts\MethodSniff;
+
 /**
  * Checks for the existence of a methods docblock as well as the @return annotation inside the docblock.
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
  * @author Dimitri Kontsevoi <dimitri.kontsevoi@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sniffs_Abstract_MethodSniff
+class MethodHasDocBlockSniff extends MethodSniff
 {
     /** @var string[] */
     private $methodNamesWithoutNecessaryDocBlock = ['setUp', 'tearDown', 'setUpTest', 'tearDownTest'];
@@ -16,7 +22,7 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $sniffedFile, $index)
+    public function process(File $sniffedFile, $index)
     {
         if ($this->methodNeedsDocBlock($sniffedFile, $index) && !$this->hasMethodDocBlock($sniffedFile, $index))
         {
@@ -27,15 +33,32 @@ class Production_Sniffs_Commenting_MethodHasDocBlockSniff extends Production_Sni
     /**
      * Checks if the method declaration is in need of a docblock.
      *
-     * @param PHP_CodeSniffer_File $sniffedFile file to be checked
-     * @param int                  $index position of current token in token list
+     * @param File $sniffedFile file to be checked
+     * @param int  $index position of current token in token list
      *
      * @return bool
      */
-    private function methodNeedsDocBlock(PHP_CodeSniffer_File $sniffedFile, $index)
+    private function methodNeedsDocBlock(File $sniffedFile, $index)
     {
         $methodName = $sniffedFile->getDeclarationName($index);
 
         return !in_array($methodName, $this->methodNamesWithoutNecessaryDocBlock, true);
+    }
+
+    /**
+     * Processes a token that is found within the scope that this test is
+     * listening to.
+     *
+     * @param File $phpcsFile The file where this token was found.
+     * @param int  $stackPtr The position in the stack where this
+     *                                               token was found.
+     * @param int  $currScope The position in the tokens array that
+     *                                               opened the scope that this test is
+     *                                               listening for.
+     *
+     * @return void
+     */
+    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
+    {
     }
 }

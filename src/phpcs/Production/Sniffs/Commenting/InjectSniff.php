@@ -1,11 +1,17 @@
 <?php
+namespace Sparhandy\Sniffs\Commenting;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks the correct usage of @Inject and @Injectable annotations.
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Commenting_InjectSniff implements PHP_CodeSniffer_Sniff
+class InjectSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -31,11 +37,11 @@ class Production_Sniffs_Commenting_InjectSniff implements PHP_CodeSniffer_Sniff
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens  = $phpcsFile->getTokens();
         $content = $tokens[$stackPointer]['content'];
-        if (preg_match('/@ *inject/i', $content, $matches) !== 0)
+        if (preg_match('/@ *inject/i', $content) !== 0)
         {
             $injectContent     = $tokens[$stackPointer]['content']
                 . $tokens[$stackPointer + 1]['content']
@@ -47,7 +53,7 @@ class Production_Sniffs_Commenting_InjectSniff implements PHP_CodeSniffer_Sniff
             preg_match($completePattern, $injectContent, $injectMatches);
             if (empty($injectMatches))
             {
-                $type  = 'Injection found.';
+                $type  = 'Production.Inject.InjectionFound';
                 $data  = [$injectContent];
                 $error = 'Inject[able] annotation has wrong format.';
                 $phpcsFile->addWarning($error, $stackPointer, $type, $data);

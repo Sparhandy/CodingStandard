@@ -1,11 +1,17 @@
 <?php
+namespace Sparhandy\Sniffs\Php;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+
 /**
  * Checks for the existence of octal numbers in arrays, assignments and parameter values.
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Thorsten Müller <thorsten.mueller@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
   */
-class Production_Sniffs_Php_OctalValuePresentSniff
+class OctalValuePresentSniff implements Sniff
 {
     /**
      * {@inheritdoc}
@@ -22,7 +28,7 @@ class Production_Sniffs_Php_OctalValuePresentSniff
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    public function process(File $phpcsFile, $stackPointer)
     {
         $tokens            = $phpcsFile->getTokens();
         $currentToken      = $tokens[$stackPointer];
@@ -36,7 +42,7 @@ class Production_Sniffs_Php_OctalValuePresentSniff
             return;
         }
 
-        $type  = 'Value element is octal.';
+        $type  = 'Production.OctalValuePresent.ValueEelementIsOctal';
         $data  = $currentValue;
         $error = 'Value element is octal in Line: ' . $currentLine;
         $phpcsFile->addError($error, $stackPointer, $type, $data);

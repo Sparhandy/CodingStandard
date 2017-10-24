@@ -1,12 +1,20 @@
 <?php
+namespace Sparhandy\Sniffs\Methods;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\AbstractScopeSniff;
+use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Ensures method names are defined using camel case.
  *
  * @author Greg Sherwood <gsherwood@squiz.net>
  * @author Jens von der Heydt <jens.heydt@ppw.de>
  * @author Alexander Christmann <alexander.christmann@sh.de>
+ * @author Sebastian Knott <sebastian.knott@sh.de>
  */
-class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer_Standards_AbstractScopeSniff
+class CamelCapsMethodNameSniff extends AbstractScopeSniff
 {
     /**
      * Constructs a PSR1_Sniffs_Methods_CamelCapsMethodNameSniff.
@@ -19,13 +27,13 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
     /**
      * Processes the tokens within the scope.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
-     * @param int                  $stackPointer The position where this token was found
-     * @param int                  $currScope The position of the current scope.
+     * @param File $phpcsFile The file being processed.
+     * @param int  $stackPointer The position where this token was found
+     * @param int  $currScope The position of the current scope.
      *
      * @return void
      */
-    protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPointer, $currScope)
+    protected function processTokenWithinScope(File $phpcsFile, $stackPointer, $currScope)
     {
         $methodName = $phpcsFile->getDeclarationName($stackPointer);
         if ($methodName === null)
@@ -45,14 +53,14 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
 
         $testName = ltrim($methodName, '_');
 
-        if (PHP_CodeSniffer::isCamelCaps($testName, false, true, false) === false)
+        if (Common::isCamelCaps($testName, false, true, false) === false)
         {
             $className = $phpcsFile->getDeclarationName($currScope);
             if ($this->isUnitTest($phpcsFile, $stackPointer) === false)
             {
                 $error     = 'Method name "%s" is not in camel caps format';
                 $errorData = [$className . '::' . $methodName];
-                $phpcsFile->addError($error, $stackPointer, 'NotCamelCaps', $errorData);
+                $phpcsFile->addError($error, $stackPointer, 'Production.CamelCapsMethodName.NotCamelCaps', $errorData);
                 $phpcsFile->recordMetric($stackPointer, 'CamelCase method name', 'no');
             }
         }
@@ -65,15 +73,15 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
     /**
      * Checks if the method is marked as a unit test.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile
-     * @param int                  $stackPointer
+     * @param File $phpcsFile
+     * @param int  $stackPointer
      *
      * @return bool
      */
-    private function isUnitTest(PHP_CodeSniffer_File $phpcsFile, $stackPointer)
+    private function isUnitTest(File $phpcsFile, $stackPointer)
     {
         $tokens     = $phpcsFile->getTokens();
-        $find       = PHP_CodeSniffer_Tokens::$methodPrefixes;
+        $find       = Tokens::$methodPrefixes;
         $find[]     = T_WHITESPACE;
         $commentEnd = $phpcsFile->findPrevious($find, ($stackPointer - 1), null, true);
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
@@ -98,5 +106,19 @@ class Production_Sniffs_Methods_CamelCapsMethodNameSniff extends PHP_CodeSniffer
         }
 
         return false;
+    }
+
+    /**
+     * Processes a token that is found outside the scope that this test is
+     * listening to.
+     *
+     * @param File $phpcsFile The file where this token was found.
+     * @param int  $stackPtr The position in the stack where this
+     *                                               token was found.
+     *
+     * @return void
+     */
+    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
+    {
     }
 }
