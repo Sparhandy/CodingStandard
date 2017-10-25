@@ -3,6 +3,7 @@ namespace Sparhandy\Sniffs\Classes;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * Checks if the opening php tag is used the way we want it to.
@@ -47,7 +48,7 @@ class OpenPHPTagSniff implements Sniff
 
         if ($openTag['code'] === T_OPEN_TAG_WITH_ECHO)
         {
-            $nextVar = $tokens[$phpcsFile->findNext(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPointer + 1), null, true)];
+            $nextVar = $tokens[$phpcsFile->findNext(Tokens::$emptyTokens, ($stackPointer + 1), null, true)];
             $error   = 'Short PHP opening tag used with echo; expected "<?php echo %s ..." but found "%s %s ..."';
             $data    = [
                 $nextVar['content'],
