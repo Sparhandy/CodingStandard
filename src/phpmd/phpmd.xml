@@ -39,7 +39,7 @@
         <properties>
             <property name="minimum" value="3"/>
             <!-- comma separated list of exceptions -->
-            <property name="exceptions" value="id,x,y,to,cc,up,down"/>
+            <property name="exceptions" value="id,x,y,to,cc,up,down,I"/>
         </properties>
     </rule>
     <rule ref="rulesets/naming.xml/LongVariable">
