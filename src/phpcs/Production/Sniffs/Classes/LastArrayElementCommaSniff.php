@@ -14,6 +14,8 @@ class LastArrayElementCommaSniff implements Sniff
 {
     /**
      * {@inheritdoc}
+     *
+     * @return string[]
      */
     public function register()
     {
@@ -22,6 +24,9 @@ class LastArrayElementCommaSniff implements Sniff
 
     /**
      * {@inheritdoc}
+     *
+     * @param File $phpcsFile
+     * @param int  $stackPointer
      *
      * @return void
      */

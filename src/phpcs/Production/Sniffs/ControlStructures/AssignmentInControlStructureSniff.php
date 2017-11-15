@@ -29,6 +29,9 @@ class AssignmentInControlStructureSniff implements Sniff
     /**
      * {@inheritdoc}
      *
+     * @param File $phpcsFile
+     * @param int  $stackPointer
+     *
      * @return void
      */
     public function process(File $phpcsFile, $stackPointer)
