@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="PPW Coding Standard">
+<ruleset name="Sparhandy Coding Standard">
     <description>
         This is the Sparhandy coding standard except version compatibility sniffs.
 
-        This standard has been tested to work with PHP_CodeSniffer 3.1.0.
+        This standard has been tested to work with PHP_CodeSniffer 3.1.1.
     </description>
 
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
@@ -91,6 +91,7 @@
     <rule ref="Squiz.Commenting.EmptyCatchComment"/>
     <rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
     <rule ref="Squiz.Commenting.PostStatementComment"/>
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
     <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
     <rule ref="Squiz.ControlStructures.ForLoopDeclaration"/>
     <rule ref="Squiz.Functions.FunctionDeclaration"/>
@@ -138,4 +139,6 @@
     <rule ref="Production.Classes.UseNamespacePath"/>
     <rule ref="Production.Methods.StandardMethodVisibilityInTest"/>
     <rule ref="Production.Methods.CamelCapsMethodName"/>
+    <rule ref="Production.Commenting.FunctionComment"/>
+
 </ruleset>

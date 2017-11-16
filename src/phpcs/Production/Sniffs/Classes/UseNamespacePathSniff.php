@@ -36,6 +36,8 @@ class UseNamespacePathSniff implements Sniff
 
     /**
      * {@inheritdoc}
+     *
+     * @return string[]
      */
     public function register()
     {
@@ -48,6 +50,9 @@ class UseNamespacePathSniff implements Sniff
 
     /**
      * {@inheritdoc}
+     *
+     * @param File $phpcsFile
+     * @param int  $stackPointer
      *
      * @return void
      */

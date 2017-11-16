@@ -16,6 +16,9 @@ class MethodDocBlockHasDescriptionSniff extends MethodSniff
     /**
      * {@inheritdoc}
      *
+     * @param File $sniffedFile
+     * @param int  $index
+     *
      * @return void
      */
     public function process(File $sniffedFile, $index)

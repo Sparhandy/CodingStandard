@@ -10,11 +10,13 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Thorsten Müller <thorsten.mueller@sh.de>
  * @author Sebastian Knott <sebastian.knott@sh.de>
-  */
+ */
 class OctalValuePresentSniff implements Sniff
 {
     /**
      * {@inheritdoc}
+     *
+     * @return int[]
      */
     public function register()
     {
@@ -25,6 +27,9 @@ class OctalValuePresentSniff implements Sniff
 
     /**
      * {@inheritdoc}
+     *
+     * @param File $phpcsFile
+     * @param int  $stackPointer
      *
      * @return void
      */

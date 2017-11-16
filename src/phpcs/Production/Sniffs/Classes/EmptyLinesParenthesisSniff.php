@@ -24,6 +24,8 @@ class EmptyLinesParenthesisSniff implements Sniff
 
     /**
      * {@inheritdoc}
+     *
+     * @return string[]
      */
     public function register()
     {
@@ -36,7 +38,11 @@ class EmptyLinesParenthesisSniff implements Sniff
     /**
      * {@inheritdoc}
      *
+     * @param File $phpcsFile
+     * @param int  $stackPointer
+     *
      * @throws UnexpectedValueException
+     * @return void
      */
     public function process(File $phpcsFile, $stackPointer)
     {

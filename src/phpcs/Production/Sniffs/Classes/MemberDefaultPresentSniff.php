@@ -24,6 +24,8 @@ class MemberDefaultPresentSniff implements Sniff
 
     /**
      * {@inheritdoc}
+     *
+     * @return string[]
      */
     public function register()
     {
@@ -37,6 +39,9 @@ class MemberDefaultPresentSniff implements Sniff
 
     /**
      * {@inheritdoc}
+     *
+     * @param File $phpcsFile
+     * @param int  $stackPointer
      *
      * @return void
      */
