@@ -5,6 +5,7 @@ use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\FunctionCommentSniff as PHP_CS_FunctionCommentSniff;
 use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Util\Tokens;
 
 /**
  * @author Safak Ozpinar <safak@gamegos.com>
@@ -20,6 +21,71 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
      * @var integer
      */
     private $phpVersion = null;
+
+    /**
+     * Processes this test, when one of its tokens is encountered.
+     *
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
+     * @param int                         $stackPtr  The position of the current token
+     *                                               in the stack passed in $tokens.
+     *
+     * @return void
+     */
+    public function process(File $phpcsFile, $stackPtr)
+    {
+        $tokens = $phpcsFile->getTokens();
+        $find   = Tokens::$methodPrefixes;
+        $find[] = T_WHITESPACE;
+
+        $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
+        if ($tokens[$commentEnd]['code'] === T_COMMENT) {
+            // Inline comments might just be closing comments for
+            // control structures or functions instead of function comments
+            // using the wrong comment type. If there is other code on the line,
+            // assume they relate to that code.
+            $prev = $phpcsFile->findPrevious($find, ($commentEnd - 1), null, true);
+            if ($prev !== false && $tokens[$prev]['line'] === $tokens[$commentEnd]['line']) {
+                $commentEnd = $prev;
+            }
+        }
+
+        if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
+            && $tokens[$commentEnd]['code'] !== T_COMMENT
+        ) {
+            $phpcsFile->addError('Missing function doc comment', $stackPtr, 'Production.Commenting.FunctionComment.Missing');
+            $phpcsFile->recordMetric($stackPtr, 'Function has doc comment', 'no');
+            return;
+        } else {
+            $phpcsFile->recordMetric($stackPtr, 'Function has doc comment', 'yes');
+        }
+
+        if ($tokens[$commentEnd]['code'] === T_COMMENT) {
+            $phpcsFile->addError('You must use "/**" style comments for a function comment', $stackPtr, 'Production.Commenting.FunctionComment.WrongStyle');
+            return;
+        }
+
+        if ($tokens[$commentEnd]['line'] !== ($tokens[$stackPtr]['line'] - 1)) {
+            $error = 'There must be no blank lines after the function comment';
+            $phpcsFile->addError($error, $commentEnd, 'Production.Commenting.FunctionComment.SpacingAfter');
+        }
+
+        $commentStart = $tokens[$commentEnd]['comment_opener'];
+        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
+            if ($tokens[$tag]['content'] === '@see') {
+                // Make sure the tag isn't empty.
+                $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $tag, $commentEnd);
+                if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line']) {
+                    $error = 'Content missing for @see tag in function comment';
+                    $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.EmptySees');
+                }
+            }
+        }
+
+        $this->processReturn($phpcsFile, $stackPtr, $commentStart);
+        $this->processThrows($phpcsFile, $stackPtr, $commentStart);
+        $this->processParams($phpcsFile, $stackPtr, $commentStart);
+
+    }//end process()
 
     /**
      * Process the return comment of this function comment.
@@ -47,7 +113,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                 if ($return !== null)
                 {
                     $error = 'Only 1 @return tag is allowed in a function comment';
-                    $phpcsFile->addError($error, $tag, 'DuplicateReturn');
+                    $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.DuplicateReturn');
 
                     return;
                 }
@@ -471,7 +537,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                 $realName = $realParams[$pos]['name'];
                 if ($realName !== $param['var'])
                 {
-                    $code = 'ParamNameNoMatch';
+                    $code = 'Production.Commenting.FunctionComment.ParamNameNoMatch';
                     $data = [
                         $param['var'],
                         $realName,
