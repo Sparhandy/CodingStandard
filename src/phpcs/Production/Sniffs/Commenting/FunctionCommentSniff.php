@@ -67,7 +67,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             if (empty($content) === true || $tokens[($return + 2)]['code'] !== T_DOC_COMMENT_STRING)
             {
                 $error = 'Return type missing for @return tag in function comment';
-                $phpcsFile->addError($error, $return, 'MissingReturnType');
+                $phpcsFile->addError($error, $return, 'Production.Commenting.FunctionComment.MissingReturnType');
             } else
             {
                 // Support both a return type and a description.
@@ -147,7 +147,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                             if ($tokens[$semicolon]['code'] !== T_SEMICOLON)
                             {
                                 $error = 'Function return type is void, but function contains return statement';
-                                $phpcsFile->addError($error, $return, 'InvalidReturnVoid');
+                                $phpcsFile->addError($error, $return, 'Production.Commenting.FunctionComment.InvalidReturnVoid');
                             }
                         }
                     }//end if
@@ -180,14 +180,14 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                         if ($returnToken === $endToken)
                         {
                             $error = 'Function return type is not void, but function has no return statement';
-                            $phpcsFile->addError($error, $return, 'InvalidNoReturn');
+                            $phpcsFile->addError($error, $return, 'Production.Commenting.FunctionComment.InvalidNoReturn');
                         } else
                         {
                             $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
                             if ($tokens[$semicolon]['code'] === T_SEMICOLON)
                             {
                                 $error = 'Function return type is not void, but function is returning void here';
-                                $phpcsFile->addError($error, $returnToken, 'InvalidReturnNotVoid');
+                                $phpcsFile->addError($error, $returnToken, 'Production.Commenting.FunctionComment.InvalidReturnNotVoid');
                             }
                         }
                     }//end if
@@ -196,7 +196,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
         } else
         {
             $error = 'Missing @return tag in function comment';
-            $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'MissingReturn');
+            $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'Production.Commenting.FunctionComment.MissingReturn');
         }//end if
 
     }//end processReturn()
@@ -274,12 +274,12 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                 } else
                 {
                     $error = 'Missing parameter name';
-                    $phpcsFile->addError($error, $tag, 'MissingParamName');
+                    $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.MissingParamName');
                 }//end if
             } else
             {
                 $error = 'Missing parameter type';
-                $phpcsFile->addError($error, $tag, 'MissingParamType');
+                $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.MissingParamType');
             }//end if
 
             $params[] = [
@@ -417,7 +417,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                     $param['type'],
                 ];
 
-                $fix = $phpcsFile->addFixableError($error, $param['tag'], 'IncorrectParamVarName', $data);
+                $fix = $phpcsFile->addFixableError($error, $param['tag'], 'Production.Commenting.FunctionComment.IncorrectParamVarName', $data);
                 if ($fix === true)
                 {
                     $phpcsFile->fixer->beginChangeset();
@@ -492,7 +492,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             {
                 // We must have an extra parameter comment.
                 $error = 'Superfluous parameter comment';
-                $phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');
+                $phpcsFile->addError($error, $param['tag'], 'Production.Commenting.FunctionComment.ExtraParamComment');
             }//end if
 
             if ($param['comment'] === '')
@@ -507,14 +507,14 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             if (preg_match('/^(\p{Ll}|\P{L})/u', $param['comment']) === 1)
             {
                 $error = 'Parameter comment must start with a capital letter';
-                $phpcsFile->addError($error, $param['tag'], 'ParamCommentNotCapital');
+                $phpcsFile->addError($error, $param['tag'], 'Production.Commenting.FunctionComment.ParamCommentNotCapital');
             }
 
             $lastChar = substr($param['comment'], -1);
             if ($lastChar !== '.')
             {
                 $error = 'Parameter comment must end with a full stop';
-                $phpcsFile->addError($error, $param['tag'], 'ParamCommentFullStop');
+                $phpcsFile->addError($error, $param['tag'], 'Production.Commenting.FunctionComment.ParamCommentFullStop');
             }
         }//end foreach
 
@@ -530,7 +530,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
         {
             $error = 'Doc comment for parameter "%s" missing';
             $data  = [$neededParam];
-            $phpcsFile->addError($error, $commentStart, 'MissingParamTag', $data);
+            $phpcsFile->addError($error, $commentStart, 'Production.Commenting.FunctionComment.MissingParamTag', $data);
         }
     }
 
@@ -572,7 +572,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             if ($exception === null)
             {
                 $error = 'Exception type and comment missing for @throws tag in function comment';
-                $phpcsFile->addError($error, $tag, 'InvalidThrows');
+                $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.InvalidThrows');
             } else
             {
                 // Any strings until the next tag belong to this comment.
