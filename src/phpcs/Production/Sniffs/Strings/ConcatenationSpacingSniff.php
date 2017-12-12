@@ -11,7 +11,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * @author Stefano Kowalke <blueduck@gmx.net>
  * @author Greg Sherwood <gsherwood@squiz.net>
  * @author Marc McIntyre <mmcintyre@squiz.net>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class ConcatenationSpacingSniff implements Sniff
 {

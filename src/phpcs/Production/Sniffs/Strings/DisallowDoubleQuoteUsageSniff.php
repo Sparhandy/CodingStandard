@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * Prevent usage of double quotes in favour of single quotes combined with CR, LF, CRLF etc constants.
  *
  * @author Jens von der Heydt <jens.heydt@ppw.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class DisallowDoubleQuoteUsageSniff implements Sniff
 {

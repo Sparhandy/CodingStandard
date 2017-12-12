@@ -26,4 +26,4 @@ script:
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
-  email: "sebastian.knott@sh.de"
+  email: "entwickler@sh.de"

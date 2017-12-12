@@ -9,7 +9,7 @@ use PHP_CodeSniffer\Util\Tokens;
  * Checks if the opening php tag is used the way we want it to.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class OpenPHPTagSniff implements Sniff
 {

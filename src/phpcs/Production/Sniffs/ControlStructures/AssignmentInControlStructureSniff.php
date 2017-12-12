@@ -9,7 +9,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andy Grunwald <andygrunwald@gmail.com>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class AssignmentInControlStructureSniff implements Sniff
 {

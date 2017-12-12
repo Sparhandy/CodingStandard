@@ -9,7 +9,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * @author Christian Klatt <christian.klatt@sh.de>
  * @author Thorsten Müller <thorsten.mueller@sh.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class OctalValuePresentSniff implements Sniff
 {

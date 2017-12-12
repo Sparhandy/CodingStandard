@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * Checks for the existence of a comma at the last element of an array.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class LastArrayElementCommaSniff implements Sniff
 {
