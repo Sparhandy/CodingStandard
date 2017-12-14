@@ -9,7 +9,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * @author Julian Hübner <julian.huebner@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class StandardMethodVisibilityInTestSniff implements Sniff
 {

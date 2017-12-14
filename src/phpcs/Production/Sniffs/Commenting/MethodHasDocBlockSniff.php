@@ -10,7 +10,7 @@ use Sparhandy\Sniffs\Abstracts\MethodSniff;
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
  * @author Dimitri Kontsevoi <dimitri.kontsevoi@sh.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class MethodHasDocBlockSniff extends MethodSniff
 {

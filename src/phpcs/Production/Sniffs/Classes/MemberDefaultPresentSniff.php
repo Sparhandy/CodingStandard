@@ -8,7 +8,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  * Checks for missing default values of class properties.
  *
  * @author Andreas Mirl <andreas.mirl@sh.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class MemberDefaultPresentSniff implements Sniff
 {

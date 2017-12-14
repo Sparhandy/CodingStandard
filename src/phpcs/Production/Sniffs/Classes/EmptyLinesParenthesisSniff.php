@@ -11,7 +11,7 @@ use UnexpectedValueException;
  * @author Andreas Borisov <andreas.borisov@sh.de>
  * @author Andreas Mirl <andreas.mirl@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class EmptyLinesParenthesisSniff implements Sniff
 {

@@ -9,7 +9,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * @author Alexander Christmann <alexander.christmann@sh.de>
  * @author Oliver Klee <github@oliverklee.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 abstract class MethodSniff implements Sniff
 {

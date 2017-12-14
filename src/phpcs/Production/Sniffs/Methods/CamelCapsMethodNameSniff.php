@@ -12,7 +12,7 @@ use PHP_CodeSniffer\Util\Tokens;
  * @author Greg Sherwood <gsherwood@squiz.net>
  * @author Jens von der Heydt <jens.heydt@ppw.de>
  * @author Alexander Christmann <alexander.christmann@sh.de>
- * @author Sebastian Knott <sebastian.knott@sh.de>
+ * @author Sebastian Knott <sebastian@sebastianknott.de>
  */
 class CamelCapsMethodNameSniff extends AbstractScopeSniff
 {
