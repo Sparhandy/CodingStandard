@@ -8,4 +8,7 @@
     <config name="testVersion" value="5.6" />
     <rule ref="./rulesetWithoutPHPC.xml"/>
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Production">
+        <exclude name="Production.Commenting.FunctionComment.ScalarTypeHintMissing"/>
+    </rule>
 </ruleset>

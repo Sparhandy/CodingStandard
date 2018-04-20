@@ -3,7 +3,7 @@
     <description>
         This is the Sparhandy coding standard except version compatibility sniffs.
 
-        This standard has been tested to work with PHP_CodeSniffer 3.1.1.
+        This standard has been tested to work with PHP_CodeSniffer 3.2.3.
     </description>
 
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
@@ -140,5 +140,4 @@
     <rule ref="Production.Methods.StandardMethodVisibilityInTest"/>
     <rule ref="Production.Methods.CamelCapsMethodName"/>
     <rule ref="Production.Commenting.FunctionComment"/>
-
 </ruleset>
