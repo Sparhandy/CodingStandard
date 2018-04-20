@@ -13,9 +13,9 @@ php:
 # optionally set up exclutions and allowed failures in the matrix
 matrix:
   allow_failures:
-    - php: 7.0
-    - php: 7.1
-    - php: 7.2
+    - php: 5.4
+    - php: 5.5
+    - php: 5.6
 
 before_install:
   - composer self-update
