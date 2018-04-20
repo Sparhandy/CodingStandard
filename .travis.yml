@@ -23,9 +23,8 @@ before_install:
 install: travis_retry composer update
 
 script:
-  - ./vendor/bin/phpcs -sp --extensions=php --standard=Production ./src
   - ./vendor/bin/phpmd src text src/phpmd/phpmd.xml --suffixes php
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
-  email: "entwickler@sh.de"
+  email: "github@sh.de"
