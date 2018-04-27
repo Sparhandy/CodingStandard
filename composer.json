@@ -26,6 +26,9 @@
     "wimg/php-compatibility": "^8.1",
     "phpmd/phpmd": "^2.6"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
   "autoload": {
     "psr-4": {
       "Sparhandy\\Sniffs\\": "src/phpcs/Production/Sniffs/"
