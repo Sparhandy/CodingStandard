@@ -56,9 +56,9 @@
     <rule ref="Generic.PHP.LowerCaseType"/>
     <rule ref="Generic.PHP.LowerCaseKeyword"/>
     <rule ref="Generic.PHP.NoSilencedErrors"/>
-    <rule ref="Generic.WhiteSpace.ArbitraryParenthesesSpacing"/>
     <rule ref="Generic.PHP.SAPIUsage"/>
     <rule ref="Generic.VersionControl.SubversionProperties"/>
+    <rule ref="Generic.WhiteSpace.ArbitraryParenthesesSpacing"/>
     <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
     <rule ref="Generic.WhiteSpace.ScopeIndent"/>
 
