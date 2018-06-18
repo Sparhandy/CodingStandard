@@ -44,14 +44,27 @@
     <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
     <rule ref="Generic.PHP.CharacterBeforePHPOpeningTag"/>
     <rule ref="Generic.PHP.DeprecatedFunctions"/>
-    <rule ref="Generic.PHP.ForbiddenFunctions"/>
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <property name="forbiddenFunctions" type="array">
+            <element key="delete" value="unset"/>
+            <element key="print" value="echo"/>
+            <element key="create_function" value="null"/>
+            <element key="ob_end_flush" value="null"/>
+        </property>
+    </rule>
     <rule ref="Generic.PHP.LowerCaseConstant"/>
+    <rule ref="Generic.PHP.LowerCaseType"/>
     <rule ref="Generic.PHP.LowerCaseKeyword"/>
     <rule ref="Generic.PHP.NoSilencedErrors"/>
+    <rule ref="Generic.WhiteSpace.ArbitraryParenthesesSpacing"/>
     <rule ref="Generic.PHP.SAPIUsage"/>
     <rule ref="Generic.VersionControl.SubversionProperties"/>
     <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
     <rule ref="Generic.WhiteSpace.ScopeIndent"/>
+
+    <rule ref="PSR12.Classes.ClassInstantiation"/>
+    <rule ref="PSR12.Keywords.ShortFormTypeKeywords"/>
+    <rule ref="PSR12.Operators.OperatorSpacing"/>
 
     <rule ref="MySource.Channels.DisallowSelfActions"/>
     <rule ref="MySource.Channels.IncludeOwnSystem"/>
@@ -107,12 +120,10 @@
             <property name="maxPercentage" value="49"/>
         </properties>
     </rule>
-    <rule ref="Squiz.PHP.DisallowObEndFlush"/>
     <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
     <rule ref="Squiz.PHP.DiscouragedFunctions"/>
     <rule ref="Squiz.PHP.EmbeddedPhp"/>
     <rule ref="Squiz.PHP.Eval"/>
-    <rule ref="Squiz.PHP.ForbiddenFunctions"/>
     <rule ref="Squiz.PHP.GlobalKeyword"/>
     <rule ref="Squiz.PHP.Heredoc"/>
     <rule ref="Squiz.PHP.InnerFunctions"/>
