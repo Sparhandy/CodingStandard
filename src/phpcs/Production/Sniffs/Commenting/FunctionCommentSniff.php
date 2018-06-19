@@ -23,6 +23,25 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
     private $phpVersion = null;
 
     /**
+     * An array of variable types for param/var we will check.
+     *
+     * @var string[]
+     */
+    public static $allowedTypes = [
+        'array',
+        'boolean',
+        'bool',
+        'float',
+        'integer',
+        'int',
+        'mixed',
+        'object',
+        'string',
+        'resource',
+        'callable',
+    ];
+
+    /**
      * Processes this test, when one of its tokens is encountered.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
@@ -386,7 +405,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
 
             foreach ($typeNames as $typeName)
             {
-                $suggestedName        = Common::suggestType($typeName);
+                $suggestedName        = self::suggestType($typeName);
                 $suggestedTypeNames[] = $suggestedName;
 
                 if (count($typeNames) > 1)
@@ -405,7 +424,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                 } elseif (strpos($suggestedName, 'callback') !== false)
                 {
                     $suggestedTypeHint = 'callable';
-                } elseif (in_array($suggestedName, Common::$allowedTypes, true) === false)
+                } elseif (in_array($suggestedName, self::$allowedTypes, true) === false)
                 {
                     $suggestedTypeHint = $suggestedName;
                 }
@@ -661,4 +680,77 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
         }//end foreach
 
     }//end processThrows()
+
+    /**
+     * Returns a valid variable type for param/var tag.
+     *
+     * If type is not one of the standard type, it must be a custom type.
+     * Returns the correct type name suggestion if type name is invalid.
+     *
+     * @param string $varType The variable type to process.
+     *
+     * @return string
+     */
+    public static function suggestType($varType)
+    {
+        if ($varType === '') {
+            return '';
+        }
+
+        if (in_array($varType, self::$allowedTypes) === true) {
+            return $varType;
+        } else {
+            $lowerVarType = strtolower($varType);
+            switch ($lowerVarType) {
+                case 'bool':
+                case 'boolean':
+                    return 'bool';
+                case 'double':
+                case 'real':
+                case 'float':
+                    return 'float';
+                case 'int':
+                case 'integer':
+                    return 'int';
+                case 'array()':
+                case 'array':
+                    return 'array';
+            }//end switch
+
+            if (strpos($lowerVarType, 'array(') !== false) {
+                // Valid array declaration:
+                // array, array(type), array(type1 => type2).
+                $matches = [];
+                $pattern = '/^array\(\s*([^\s^=^>]*)(\s*=>\s*(.*))?\s*\)/i';
+                if (preg_match($pattern, $varType, $matches) !== 0) {
+                    $type1 = '';
+                    if (isset($matches[1]) === true) {
+                        $type1 = $matches[1];
+                    }
+
+                    $type2 = '';
+                    if (isset($matches[3]) === true) {
+                        $type2 = $matches[3];
+                    }
+
+                    $type1 = self::suggestType($type1);
+                    $type2 = self::suggestType($type2);
+                    if ($type2 !== '') {
+                        $type2 = ' => '.$type2;
+                    }
+
+                    return "array($type1$type2)";
+                } else {
+                    return 'array';
+                }//end if
+            } else if (in_array($lowerVarType, self::$allowedTypes) === true) {
+                // A valid type, but not lower cased.
+                return $lowerVarType;
+            } else {
+                // Must be a custom type name.
+                return $varType;
+            }//end if
+        }//end if
+
+    }//end suggestType()
 }
