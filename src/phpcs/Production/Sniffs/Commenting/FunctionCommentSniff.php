@@ -29,10 +29,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
      */
     public static $allowedTypes = [
         'array',
-        'boolean',
         'bool',
         'float',
-        'integer',
         'int',
         'mixed',
         'object',
@@ -703,16 +701,21 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             $lowerVarType = strtolower($varType);
             switch ($lowerVarType) {
                 case 'bool':
+                    // fall-through
                 case 'boolean':
                     return 'bool';
                 case 'double':
+                    // fall-through
                 case 'real':
+                // fall-through
                 case 'float':
                     return 'float';
                 case 'int':
+                    // fall-through
                 case 'integer':
                     return 'int';
                 case 'array()':
+                    // fall-through
                 case 'array':
                     return 'array';
             }//end switch
