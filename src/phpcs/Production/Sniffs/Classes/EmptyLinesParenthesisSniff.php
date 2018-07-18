@@ -1,5 +1,5 @@
 <?php
-namespace Sparhandy\Sniffs\Classes;
+namespace PhilippWitzmann\Sniffs\Classes;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
