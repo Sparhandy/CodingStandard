@@ -1,5 +1,5 @@
 <?php
-namespace Sparhandy\Sniffs\ControlStructures;
+namespace PhilippWitzmann\Sniffs\ControlStructures;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;

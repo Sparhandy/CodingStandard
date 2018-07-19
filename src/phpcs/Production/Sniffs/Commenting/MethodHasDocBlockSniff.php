@@ -1,8 +1,8 @@
 <?php
-namespace Sparhandy\Sniffs\Commenting;
+namespace PhilippWitzmann\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
-use Sparhandy\Sniffs\Abstracts\MethodSniff;
+use PhilippWitzmann\Sniffs\Abstracts\MethodSniff;
 
 /**
  * Checks for the existence of a methods docblock as well as the @return annotation inside the docblock.

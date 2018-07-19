@@ -1,8 +1,8 @@
 <?php
-namespace Sparhandy\Sniffs\Commenting;
+namespace PhilippWitzmann\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Files\File;
-use Sparhandy\Sniffs\Abstracts\MethodSniff;
+use PhilippWitzmann\Sniffs\Abstracts\MethodSniff;
 
 /**
  * Checks for the non-existence of an empty line between a method and its docblock.

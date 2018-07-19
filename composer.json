@@ -1,34 +1,34 @@
 {
-  "name": "sparhandy/codingstandard",
-  "description": "This is the Sparhandy coding standard.",
+  "name": "philippwitzmann/codingstandard",
+  "description": "This is my coding standard adapted from sparhandy/codingstandard.",
   "type": "phpcodesniffer-standard",
   "keywords": [
-    "sparhandy",
     "phpcs",
     "standards"
   ],
-  "homepage": "https://github.com/Sparhandy/CodingStandard",
+  "homepage": "https://github.com/PhilippWitzmann/CodingStandard",
   "license": "BSD-3-Clause",
   "authors": [
     {
-      "name": "Sebastian Knott",
-      "email": "sebastian@sebastianknott.de"
+      "name": "Philipp Witzmann",
+      "email": "pwitzmann2@gmail.com"
     }
   ],
   "support": {
-    "issues": "https://github.com/Sparhandy/CodingStandard/issues",
-    "wiki": "https://github.com/Sparhandy/CodingStandard/wiki",
-    "source": "https://github.com/Sparhandy/CodingStandard"
+    "issues": "https://github.com/PhilippWitzmann/CodingStandard/issues",
+    "wiki": "https://github.com/PhilippWitzmann/CodingStandard/wiki",
+    "source": "https://github.com/PhilippWitzmann/CodingStandard"
   },
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=7.0",
     "squizlabs/php_codesniffer": "~3.3.0",
     "wimg/php-compatibility": "~8.1.0",
-    "phpmd/phpmd": "~2.6.0"
+    "phpmd/phpmd": "~2.6.0",
+    "sebastian/phpcpd": "~4.0.0"
   },
   "autoload": {
     "psr-4": {
-      "Sparhandy\\Sniffs\\": "src/phpcs/Production/Sniffs/"
+      "PhilippWitzmann\\Sniffs\\": "src/phpcs/Production/Sniffs/"
     }
   }
 }

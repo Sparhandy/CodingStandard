@@ -1,5 +1,5 @@
 <?php
-namespace Sparhandy\Sniffs\Commenting;
+namespace PhilippWitzmann\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
