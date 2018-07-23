@@ -55,7 +55,9 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
         $find[] = T_WHITESPACE;
 
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
-        $isSpecialMethod = $methodName === '__construct' || $methodName === '__destruct';
+        $isSpecialMethod = preg_match('/^__construct/m', $methodName) === 1
+                           ||preg_match('/^__destruct/m', $methodName) === 1
+                           ||preg_match('/^(get|set|inject)[A-Z]/', $methodName) === 1;
 
         if ($isSpecialMethod)
         {
