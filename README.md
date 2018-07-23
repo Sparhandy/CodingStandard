@@ -30,7 +30,7 @@ To execute PHP Mess Detector do the following.
 ```
 
 #### PHPStan
-To execute PHP tan do the following.
+To execute PHPStan do the following.
 ```bash
 ./vendor/bin/phpstan analyse ./path/to ./your/sources
 ```
