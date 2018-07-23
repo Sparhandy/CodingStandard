@@ -110,10 +110,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             }
         }
 
-        $openCurlyBracketPosition = $phpcsFile->findPrevious([T_OPEN_CURLY_BRACKET], $commentStart);
-        $tColonPosition           = $phpcsFile->findNext([T_COLON], $openCurlyBracketPosition);
-
-        $this->processReturn($phpcsFile, $stackPtr, $commentStart, $tColonPosition);
+        $this->processReturn($phpcsFile, $stackPtr, $commentStart);
         $this->processThrows($phpcsFile, $stackPtr, $commentStart);
         $this->processParams($phpcsFile, $stackPtr, $commentStart);
 
@@ -126,12 +123,10 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
      * @param int                         $stackPtr      The position of the current token
      *                                                   in the stack passed in $tokens.
      * @param int                         $commentStart  The position in the stack where the comment started.
-     * @param int                         $colonPosition The position of a Colon ':' - (e.g.: public function foo():
-     *                                                   void)
      *
      * @return void
      */
-    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart, $colonPosition)
+    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -301,7 +296,10 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
         }
         else
         {
-            if (!$colonPosition)
+            $openCurlyBracketPosition = $phpcsFile->findPrevious([T_OPEN_CURLY_BRACKET], $commentStart);
+            $tColonPosition           = $phpcsFile->findNext([T_COLON], $openCurlyBracketPosition);
+
+            if (!$tColonPosition)
             {
                 $error = 'Missing @return tag in function comment';
                 $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'],
