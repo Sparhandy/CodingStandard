@@ -238,6 +238,18 @@ abstract class MethodSniff implements Sniff
     }
 
     /**
+     * Checks if the token in this method is a test method (starts with test).
+     *
+     * @param string $methodName
+     *
+     * @return bool
+     */
+    protected function methodIsTestMethod($methodName)
+    {
+        return preg_match('/^(test)[A-Z]/', $methodName) === 1;
+    }
+
+    /**
      * Adds a warning.
      *
      * @param File   $sniffedFile file to be checked

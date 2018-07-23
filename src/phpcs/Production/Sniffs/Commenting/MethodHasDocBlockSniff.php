@@ -51,11 +51,13 @@ class MethodHasDocBlockSniff extends MethodSniff
     {
         $methodName          = $sniffedFile->getDeclarationName($index);
         $isSpecialMethod     = $this->methodIsAccessor($methodName);
+        $isTestMethod        = $this->methodIsTestMethod($methodName);
         $isConstructor       = $this->methodIsConstructor($methodName);
         $doesNotNeedDocBlock = in_array($methodName, $this->methodNamesWithoutNecessaryDocBlock, true);
 
         return !$isSpecialMethod
                && !$isConstructor
+               && !$isTestMethod
                && !$doesNotNeedDocBlock;
     }
 
