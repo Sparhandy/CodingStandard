@@ -29,6 +29,12 @@ To execute PHP Mess Detector do the following.
 ./vendor/bin/phpmd ./path/to ./your/sources text ./vendor/philippwitzmann/codingstandard/src/phpmd/phpmd.xml --suffixes php
 ```
 
+#### PHPStan
+To execute PHPStan do the following.
+```bash
+./vendor/bin/phpstan analyse ./path/to ./your/sources
+```
+
 ### Travis-CI configuration
 
 For use in your Travis-Ci configuration file just adapt the following example and save it to .travis.yml in your root directory.
