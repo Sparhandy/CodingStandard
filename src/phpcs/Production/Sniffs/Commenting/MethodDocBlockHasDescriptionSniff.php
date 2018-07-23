@@ -71,8 +71,12 @@ class MethodDocBlockHasDescriptionSniff extends MethodSniff
         $methodName      = $sniffedFile->getDeclarationName($index);
         $isSpecialMethod = $this->methodIsAccessor($methodName);
         $isDataProvider  = $this->methodIsDataProvider($methodName);
+        $isConstructor   = $this->methodIsConstructor($methodName);
 
-        return !$isSpecialMethod && !$isDataProvider && !$this->isTestMethod($sniffedFile, $index);
+        return !$isSpecialMethod
+               && !$isDataProvider
+               && !$isConstructor
+               && !$this->isTestMethod($sniffedFile, $index);
     }
 
     /**

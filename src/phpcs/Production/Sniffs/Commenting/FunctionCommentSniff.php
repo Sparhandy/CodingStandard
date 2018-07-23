@@ -54,6 +54,14 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
         $find   = Tokens::$methodPrefixes;
         $find[] = T_WHITESPACE;
 
+        $methodName = $phpcsFile->getDeclarationName($stackPtr);
+        $isSpecialMethod = $methodName === '__construct' || $methodName === '__destruct';
+
+        if ($isSpecialMethod)
+        {
+            return;
+        }
+
         $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
         if ($tokens[$commentEnd]['code'] === T_COMMENT)
         {
