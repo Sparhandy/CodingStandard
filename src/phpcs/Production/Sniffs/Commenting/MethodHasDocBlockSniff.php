@@ -15,7 +15,13 @@ use PhilippWitzmann\Sniffs\Abstracts\MethodSniff;
 class MethodHasDocBlockSniff extends MethodSniff
 {
     /** @var string[] */
-    private $methodNamesWithoutNecessaryDocBlock = ['setUp', 'tearDown', 'setUpTest', 'tearDownTest'];
+    private $methodNamesWithoutNecessaryDocBlock = [
+        'setUp',
+        'tearDown',
+        'setUpTest',
+        'tearDownTest',
+        '__construct',
+    ];
 
     /**
      * {@inheritdoc}
@@ -37,25 +43,30 @@ class MethodHasDocBlockSniff extends MethodSniff
      * Checks if the method declaration is in need of a docblock.
      *
      * @param File $sniffedFile file to be checked
-     * @param int  $index position of current token in token list
+     * @param int  $index       position of current token in token list
      *
      * @return bool
      */
     private function methodNeedsDocBlock(File $sniffedFile, $index)
     {
-        $methodName = $sniffedFile->getDeclarationName($index);
+        $methodName          = $sniffedFile->getDeclarationName($index);
+        $isSpecialMethod     = $this->methodIsAccessor($methodName);
+        $isConstructor       = $this->methodIsConstructor($methodName);
+        $doesNotNeedDocBlock = in_array($methodName, $this->methodNamesWithoutNecessaryDocBlock, true);
 
-        return !in_array($methodName, $this->methodNamesWithoutNecessaryDocBlock, true);
+        return !$isSpecialMethod
+               && !$isConstructor
+               && !$doesNotNeedDocBlock;
     }
 
     /**
      * Processes a token that is found within the scope that this test is
      * listening to.
      *
-     * @param File $phpcsFile The file where this token was found.
-     * @param int  $stackPtr The position in the stack where this
+     * @param File $phpcsFile                        The file where this token was found.
+     * @param int  $stackPtr                         The position in the stack where this
      *                                               token was found.
-     * @param int  $currScope The position in the tokens array that
+     * @param int  $currScope                        The position in the tokens array that
      *                                               opened the scope that this test is
      *                                               listening for.
      *
