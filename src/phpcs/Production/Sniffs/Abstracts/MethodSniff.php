@@ -226,6 +226,18 @@ abstract class MethodSniff implements Sniff
     }
 
     /**
+     * Checks if the token in this method is the constructor.
+     *
+     * @param string $methodName
+     *
+     * @return bool
+     */
+    protected function methodIsConstructor($methodName)
+    {
+        return preg_match('^/__construct/', $methodName) === 1;
+    }
+
+    /**
      * Adds a warning.
      *
      * @param File   $sniffedFile file to be checked
