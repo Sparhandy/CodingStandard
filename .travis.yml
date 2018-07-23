@@ -27,4 +27,4 @@ script:
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
-  email: "github@sh.de"
+  email: "pwitzmann2@gmail.com"
