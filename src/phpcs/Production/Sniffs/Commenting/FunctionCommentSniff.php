@@ -8,8 +8,8 @@ use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Tokens;
 
 /**
- * @author Safak Ozpinar <safak@gamegos.com>
- * @author Philipp Witzmann <philipp.witzmann@sh.de>
+ * @author                    Safak Ozpinar <safak@gamegos.com>
+ * @author                    Philipp Witzmann <philipp.witzmann@sh.de>
  * @codingStandardsIgnoreFile duplicated vendor code. Removed requiring parameter, throws comment
  * @SuppressWarnings(PHPMD) duplicated vendor code. Removed requiring parameter, throws comment
  */
@@ -55,50 +55,65 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
         $find[] = T_WHITESPACE;
 
         $commentEnd = $phpcsFile->findPrevious($find, ($stackPtr - 1), null, true);
-        if ($tokens[$commentEnd]['code'] === T_COMMENT) {
+        if ($tokens[$commentEnd]['code'] === T_COMMENT)
+        {
             // Inline comments might just be closing comments for
             // control structures or functions instead of function comments
             // using the wrong comment type. If there is other code on the line,
             // assume they relate to that code.
             $prev = $phpcsFile->findPrevious($find, ($commentEnd - 1), null, true);
-            if ($prev !== false && $tokens[$prev]['line'] === $tokens[$commentEnd]['line']) {
+            if ($prev !== false && $tokens[$prev]['line'] === $tokens[$commentEnd]['line'])
+            {
                 $commentEnd = $prev;
             }
         }
 
         if ($tokens[$commentEnd]['code'] !== T_DOC_COMMENT_CLOSE_TAG
             && $tokens[$commentEnd]['code'] !== T_COMMENT
-        ) {
+        )
+        {
             $phpcsFile->addError('Missing function doc comment', $stackPtr, 'Production.Commenting.FunctionComment.Missing');
             $phpcsFile->recordMetric($stackPtr, 'Function has doc comment', 'no');
+
             return;
-        } else {
+        }
+        else
+        {
             $phpcsFile->recordMetric($stackPtr, 'Function has doc comment', 'yes');
         }
 
-        if ($tokens[$commentEnd]['code'] === T_COMMENT) {
+        if ($tokens[$commentEnd]['code'] === T_COMMENT)
+        {
             $phpcsFile->addError('You must use "/**" style comments for a function comment', $stackPtr, 'Production.Commenting.FunctionComment.WrongStyle');
+
             return;
         }
 
-        if ($tokens[$commentEnd]['line'] !== ($tokens[$stackPtr]['line'] - 1)) {
+        if ($tokens[$commentEnd]['line'] !== ($tokens[$stackPtr]['line'] - 1))
+        {
             $error = 'There must be no blank lines after the function comment';
             $phpcsFile->addError($error, $commentEnd, 'Production.Commenting.FunctionComment.SpacingAfter');
         }
 
         $commentStart = $tokens[$commentEnd]['comment_opener'];
-        foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
-            if ($tokens[$tag]['content'] === '@see') {
+        foreach ($tokens[$commentStart]['comment_tags'] as $tag)
+        {
+            if ($tokens[$tag]['content'] === '@see')
+            {
                 // Make sure the tag isn't empty.
                 $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $tag, $commentEnd);
-                if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line']) {
+                if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line'])
+                {
                     $error = 'Content missing for @see tag in function comment';
                     $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.EmptySees');
                 }
             }
         }
 
-        $this->processReturn($phpcsFile, $stackPtr, $commentStart);
+        $openCurlyBracketPosition = $phpcsFile->findPrevious([T_OPEN_CURLY_BRACKET], $commentStart);
+        $tColonPosition           = $phpcsFile->findNext([T_COLON], $openCurlyBracketPosition);
+
+        $this->processReturn($phpcsFile, $stackPtr, $commentStart, $tColonPosition);
         $this->processThrows($phpcsFile, $stackPtr, $commentStart);
         $this->processParams($phpcsFile, $stackPtr, $commentStart);
 
@@ -107,20 +122,23 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
     /**
      * Process the return comment of this function comment.
      *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The file being scanned.
-     * @param int                         $stackPtr The position of the current token
-     *                                                  in the stack passed in $tokens.
-     * @param int                         $commentStart The position in the stack where the comment started.
+     * @param \PHP_CodeSniffer\Files\File $phpcsFile     The file being scanned.
+     * @param int                         $stackPtr      The position of the current token
+     *                                                   in the stack passed in $tokens.
+     * @param int                         $commentStart  The position in the stack where the comment started.
+     * @param int                         $colonPosition The position of a Colon ':' - (e.g.: public function foo():
+     *                                                   void)
      *
      * @return void
      */
-    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
+    protected function processReturn(File $phpcsFile, $stackPtr, $commentStart, $colonPosition)
     {
         $tokens = $phpcsFile->getTokens();
 
         // Skip constructor and destructor.
         $methodName      = $phpcsFile->getDeclarationName($stackPtr);
-        $isSpecialMethod = ($methodName === '__construct' || $methodName === '__destruct' || $methodName === 'injectDependencies');
+        $isSpecialMethod =
+            ($methodName === '__construct' || $methodName === '__destruct' || $methodName === 'injectDependencies');
 
         $return = null;
         foreach ($tokens[$commentStart]['comment_tags'] as $tag)
@@ -151,10 +169,12 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             {
                 $error = 'Return type missing for @return tag in function comment';
                 $phpcsFile->addError($error, $return, 'Production.Commenting.FunctionComment.MissingReturnType');
-            } else
+            }
+            else
             {
                 // Support both a return type and a description.
-                $split = preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\a-z0-9\[\]]+))*)( .*)?`i', $content, $returnParts);
+                $split =
+                    preg_match('`^((?:\|?(?:array\([^\)]*\)|[\\\\a-z0-9\[\]]+))*)( .*)?`i', $content, $returnParts);
                 if (isset($returnParts[1]) === false)
                 {
                     return;
@@ -234,7 +254,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                             }
                         }
                     }//end if
-                } elseif ($returnType !== 'mixed' && in_array('void', $typeNames, true) === false)
+                }
+                elseif ($returnType !== 'mixed' && in_array('void', $typeNames, true) === false)
                 {
                     // If return type is not void, there needs to be a return statement
                     // somewhere in the function that returns something.
@@ -264,7 +285,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                         {
                             $error = 'Function return type is not void, but function has no return statement';
                             $phpcsFile->addError($error, $return, 'Production.Commenting.FunctionComment.InvalidNoReturn');
-                        } else
+                        }
+                        else
                         {
                             $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
                             if ($tokens[$semicolon]['code'] === T_SEMICOLON)
@@ -276,10 +298,15 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                     }//end if
                 }//end if
             }//end if
-        } else
+        }
+        else
         {
-            $error = 'Missing @return tag in function comment';
-            $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'], 'Production.Commenting.FunctionComment.MissingReturn');
+            if (!$colonPosition)
+            {
+                $error = 'Missing @return tag in function comment';
+                $phpcsFile->addError($error, $tokens[$commentStart]['comment_closer'],
+                                     'Production.Commenting.FunctionComment.MissingReturn');
+            }
         }//end if
 
     }//end processReturn()
@@ -332,7 +359,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING)
             {
                 $matches = [];
-                preg_match('/([^$&.]+)(?:((?:\.\.\.)?(?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
+                preg_match('/([^$&.]+)(?:((?:\.\.\.)?(?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag +
+                                                                                                 2)]['content'], $matches);
 
                 if (empty($matches) === false)
                 {
@@ -354,12 +382,14 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                     {
                         $maxVar = $varLen;
                     }
-                } else
+                }
+                else
                 {
                     $error = 'Missing parameter name';
                     $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.MissingParamName');
                 }//end if
-            } else
+            }
+            else
             {
                 $error = 'Missing parameter type';
                 $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.MissingParamType');
@@ -416,13 +446,16 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                 if (strpos($suggestedName, 'array') !== false || substr($suggestedName, -2) === '[]')
                 {
                     $suggestedTypeHint = 'array';
-                } elseif (strpos($suggestedName, 'callable') !== false)
+                }
+                elseif (strpos($suggestedName, 'callable') !== false)
                 {
                     $suggestedTypeHint = 'callable';
-                } elseif (strpos($suggestedName, 'callback') !== false)
+                }
+                elseif (strpos($suggestedName, 'callback') !== false)
                 {
                     $suggestedTypeHint = 'callable';
-                } elseif (in_array($suggestedName, self::$allowedTypes, true) === false)
+                }
+                elseif (in_array($suggestedName, self::$allowedTypes, true) === false)
                 {
                     $suggestedTypeHint = $suggestedName;
                 }
@@ -432,13 +465,16 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                     if ($suggestedName === 'string')
                     {
                         $suggestedTypeHint = 'string';
-                    } elseif ($suggestedName === 'int' || $suggestedName === 'integer')
+                    }
+                    elseif ($suggestedName === 'int' || $suggestedName === 'integer')
                     {
                         $suggestedTypeHint = 'int';
-                    } elseif ($suggestedName === 'float')
+                    }
+                    elseif ($suggestedName === 'float')
                     {
                         $suggestedTypeHint = 'float';
-                    } elseif ($suggestedName === 'bool' || $suggestedName === 'boolean')
+                    }
+                    elseif ($suggestedName === 'bool' || $suggestedName === 'boolean')
                     {
                         $suggestedTypeHint = 'bool';
                     }
@@ -466,7 +502,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                         }
 
                         $phpcsFile->addError($error, $stackPtr, $errorCode, $data);
-                    } elseif ($typeHint !== substr($suggestedTypeHint, strlen($typeHint) * -1))
+                    }
+                    elseif ($typeHint !== substr($suggestedTypeHint, strlen($typeHint) * -1))
                     {
                         $error = 'Expected type hint "%s"; found "%s" for %s';
                         $data  = [
@@ -476,7 +513,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                         ];
                         $phpcsFile->addError($error, $stackPtr, 'IncorrectTypeHint', $data);
                     }//end if
-                } elseif ($suggestedTypeHint === '' && isset($realParams[$pos]) === true)
+                }
+                elseif ($suggestedTypeHint === '' && isset($realParams[$pos]) === true)
                 {
                     $typeHint = $realParams[$pos]['type_hint'];
                     if ($typeHint !== '')
@@ -500,7 +538,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                     $param['type'],
                 ];
 
-                $fix = $phpcsFile->addFixableError($error, $param['tag'], 'Production.Commenting.FunctionComment.IncorrectParamVarName', $data);
+                $fix =
+                    $phpcsFile->addFixableError($error, $param['tag'], 'Production.Commenting.FunctionComment.IncorrectParamVarName', $data);
                 if ($fix === true)
                 {
                     $phpcsFile->fixer->beginChangeset();
@@ -571,7 +610,8 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
 
                     $phpcsFile->addError($error, $param['tag'], $code, $data);
                 }
-            } elseif (substr($param['var'], -4) !== ',...')
+            }
+            elseif (substr($param['var'], -4) !== ',...')
             {
                 // We must have an extra parameter comment.
                 $error = 'Superfluous parameter comment';
@@ -620,10 +660,10 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
     /**
      * Process any throw tags that this function comment has.
      *
-     * @param File $phpcsFile The file being scanned.
-     * @param int  $stackPtr The position of the current token
+     * @param File $phpcsFile                           The file being scanned.
+     * @param int  $stackPtr                            The position of the current token
      *                                                  in the stack passed in $tokens.
-     * @param int  $commentStart The position in the stack where the comment started.
+     * @param int  $commentStart                        The position in the stack where the comment started.
      *
      * @return void
      */
@@ -656,13 +696,15 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
             {
                 $error = 'Exception type and comment missing for @throws tag in function comment';
                 $phpcsFile->addError($error, $tag, 'Production.Commenting.FunctionComment.InvalidThrows');
-            } else
+            }
+            else
             {
                 // Any strings until the next tag belong to this comment.
                 if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true)
                 {
                     $end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
-                } else
+                }
+                else
                 {
                     $end = $tokens[$commentStart]['comment_closer'];
                 }
@@ -691,15 +733,20 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
      */
     public static function suggestType($varType)
     {
-        if ($varType === '') {
+        if ($varType === '')
+        {
             return '';
         }
 
-        if (in_array($varType, self::$allowedTypes) === true) {
+        if (in_array($varType, self::$allowedTypes) === true)
+        {
             return $varType;
-        } else {
+        }
+        else
+        {
             $lowerVarType = strtolower($varType);
-            switch ($lowerVarType) {
+            switch ($lowerVarType)
+            {
                 case 'bool':
                     // fall-through
                 case 'boolean':
@@ -707,7 +754,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                 case 'double':
                     // fall-through
                 case 'real':
-                // fall-through
+                    // fall-through
                 case 'float':
                     return 'float';
                 case 'int':
@@ -720,38 +767,52 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                     return 'array';
             }//end switch
 
-            if (strpos($lowerVarType, 'array(') !== false) {
+            if (strpos($lowerVarType, 'array(') !== false)
+            {
                 // Valid array declaration:
                 // array, array(type), array(type1 => type2).
                 $matches = [];
                 $pattern = '/^array\(\s*([^\s^=^>]*)(\s*=>\s*(.*))?\s*\)/i';
-                if (preg_match($pattern, $varType, $matches) !== 0) {
+                if (preg_match($pattern, $varType, $matches) !== 0)
+                {
                     $type1 = '';
-                    if (isset($matches[1]) === true) {
+                    if (isset($matches[1]) === true)
+                    {
                         $type1 = $matches[1];
                     }
 
                     $type2 = '';
-                    if (isset($matches[3]) === true) {
+                    if (isset($matches[3]) === true)
+                    {
                         $type2 = $matches[3];
                     }
 
                     $type1 = self::suggestType($type1);
                     $type2 = self::suggestType($type2);
-                    if ($type2 !== '') {
-                        $type2 = ' => '.$type2;
+                    if ($type2 !== '')
+                    {
+                        $type2 = ' => ' . $type2;
                     }
 
                     return "array($type1$type2)";
-                } else {
+                }
+                else
+                {
                     return 'array';
                 }//end if
-            } else if (in_array($lowerVarType, self::$allowedTypes) === true) {
-                // A valid type, but not lower cased.
-                return $lowerVarType;
-            } else {
-                // Must be a custom type name.
-                return $varType;
+            }
+            else
+            {
+                if (in_array($lowerVarType, self::$allowedTypes) === true)
+                {
+                    // A valid type, but not lower cased.
+                    return $lowerVarType;
+                }
+                else
+                {
+                    // Must be a custom type name.
+                    return $varType;
+                }
             }//end if
         }//end if
 

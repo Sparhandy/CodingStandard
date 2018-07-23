@@ -1,15 +1,15 @@
-[![Build Status](https://travis-ci.org/Sparhandy/CodingStandard.svg?branch=master)](https://travis-ci.org/Sparhandy/CodingStandard) [![Github Releases](https://img.shields.io/github/downloads/Sparhandy/CodingStandard/latest/total.svg)]() [![Release](https://img.shields.io/github/release/Sparhandy/CodingStandard.svg)]() [![Packagist](https://img.shields.io/packagist/l/Sparhandy/CodingStandard.svg)]()
+[![Build Status](https://travis-ci.org/PhilippWitzmann/CodingStandard.svg?branch=master)](https://travis-ci.org/PhilippWitzmann/CodingStandard) [![Github Releases](https://img.shields.io/github/downloads/PhilippWitzmann/CodingStandard/latest/total.svg)]() [![Release](https://img.shields.io/github/release/PhilippWitzmann/CodingStandard.svg)]() [![Packagist](https://img.shields.io/packagist/l/PhilippWitzmann/CodingStandard.svg)]()
 
-# Sparhandy Coding Standard
+# Coding Standard
 
-This repository contains all necessary files to configure PHP Code Sniffer and PHP Mess Detector according to our coding standard. 
+This repository contains all necessary files to configure PHP Code Sniffer and PHP Mess Detector. 
 
 ## Installation with composer
 
 For now you have to use the dev-master version.
 
 ```bash
-composer require "sparhandy/codingstandard" "dev-master"
+composer require "philippwitzmann/codingstandard" "~2"
 ```
 
 ## Usage
@@ -18,15 +18,15 @@ composer require "sparhandy/codingstandard" "dev-master"
 
 #### PHP Code Sniffer
 
-To execute PHP Code Sniffer configured for sparhandy coding standards do the following.
+To execute PHP Code Sniffer do the following.
 ```bash
-./vendor/bin/phpcs --extensions=php --standard=./vendor/sparhandy/codingstandard/src/phpcs/Production/ruleset.xml ./path/to ./your/sources 
+./vendor/bin/phpcs --extensions=php --standard=./vendor/philippwitzmann/codingstandard/src/phpcs/Production/ruleset.xml ./path/to ./your/sources 
 ```
 
 #### PHP Mess Detector
-To execute PHP Mess Detector configured for sparhandy coding standards do the following.
+To execute PHP Mess Detector do the following.
 ```bash
-./vendor/bin/phpmd ./path/to ./your/sources text ./vendor/sparhandy/codingstandard/src/phpmd/phpmd.xml --suffixes php
+./vendor/bin/phpmd ./path/to ./your/sources text ./vendor/philippwitzmann/codingstandard/src/phpmd/phpmd.xml --suffixes php
 ```
 
 #### PHPStan
@@ -65,7 +65,7 @@ script:
 
 If you want to contribute to the standard here is how it works.
 
-* Create a fork of Sparhandy/CodingStandard.
+* Create a fork of PhilippWitzmann/CodingStandard.
 * Create your branch from master and commit your changes.
 * Push your branch to your fork.
 * Create a pull request on GitHub.
@@ -74,3 +74,4 @@ If you want to contribute to the standard here is how it works.
 
 # Acknowledgements
 This would not be possible without the tremendous work of the good people at [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) and [PHP Mess Detector](https://github.com/phpmd/phpmd) and of course the authors annotated in the source files.
+Also check out the original version of this standard over at the amazing people from [Sparhandy](https://github.com/Sparhandy/CodingStandard)
