@@ -234,7 +234,7 @@ abstract class MethodSniff implements Sniff
      */
     protected function methodIsConstructor($methodName)
     {
-        return preg_match('^/__construct/', $methodName) === 1;
+        return preg_match('/^__construct/m', $methodName) === 1;
     }
 
     /**
