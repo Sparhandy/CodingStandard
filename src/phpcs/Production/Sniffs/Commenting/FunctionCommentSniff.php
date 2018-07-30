@@ -171,7 +171,7 @@ class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
                 $suggestedNames = [];
                 foreach ($typeNames as $i => $typeName)
                 {
-                    $suggestedName = Common::suggestType($typeName);
+                    $suggestedName = self::suggestType($typeName);
                     if (in_array($suggestedName, $suggestedNames) === false)
                     {
                         $suggestedNames[] = $suggestedName;
