@@ -3,7 +3,7 @@ namespace Sparhandy\Sniffs\Commenting;
 
 use PHP_CodeSniffer\Config;
 use PHP_CodeSniffer\Files\File;
-use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Standards\Squiz\Sniffs\Commenting\FunctionCommentSniff as PHP_CS_FunctionCommentSniff;
 use PHP_CodeSniffer\Util\Common;
 use PHP_CodeSniffer\Util\Tokens;
 
@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Util\Tokens;
  * @codingStandardsIgnoreFile duplicated vendor code. Removed requiring parameter, throws comment
  * @SuppressWarnings(PHPMD) duplicated vendor code. Removed requiring parameter, throws comment
  */
-class FunctionCommentSniff implements Sniff
+class FunctionCommentSniff extends PHP_CS_FunctionCommentSniff
 {
     /**
      * The current PHP version.
@@ -21,17 +21,6 @@ class FunctionCommentSniff implements Sniff
      * @var integer
      */
     private $phpVersion = null;
-
-    /**
-     * Returns an array of tokens this test wants to listen for.
-     *
-     * @return array
-     */
-    public function register()
-    {
-        return [T_FUNCTION];
-
-    }//end register()
 
     /**
      * An array of variable types for param/var we will check.
